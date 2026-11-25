@@ -1,0 +1,37 @@
+# Isolated Docker Container for Untrusted MCP SSE Sandbox Execution
+FROM python:3.11-slim
+
+WORKDIR /app
+
+# Install security utilities and curl for healthchecks
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    bash \
+    curl \
+    ca-certificates \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install MCP SDK, Starlette, Uvicorn, and httpx
+RUN pip install --no-cache-dir \
+    mcp \
+    starlette \
+    uvicorn \
+    httpx
+
+# Copy the server implementation
+COPY src/ /app/src/
+
+# Create an unprivileged user for executing untrusted snippets safely
+RUN useradd -m -u 1000 sandboxuser && chown -R sandboxuser:sandboxuser /app
+USER sandboxuser
+
+EXPOSE 8005
+
+ENV PYTHONUNBUFFERED=1 \
+    SANDBOX_TRANSPORT=sse \
+    SANDBOX_HOST=0.0.0.0 \
+    SANDBOX_PORT=8005
+
+HEALTHCHECK --interval=15s --timeout=5s --retries=3 \
+    CMD python -c "import urllib.request; urllib.request.urlopen('http://localhost:8005/sse', timeout=2.0)" || exit 0
+
+ENTRYPOINT ["python", "-m", "src.mcp_servers.sandbox_server", "--transport", "sse", "--host", "0.0.0.0", "--port", "8005"]

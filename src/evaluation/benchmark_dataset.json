@@ -1,0 +1,2526 @@
+[
+  {
+    "test_id": "RES-001",
+    "input": "Research the latest developments in quantum error correction surface codes. Retrieve empirical sources and verify claim grounding.",
+    "expected_workflow": "research",
+    "required_capabilities": [
+      "web_search",
+      "evidence_extraction",
+      "grounding_verification",
+      "contradiction_detection"
+    ],
+    "success_criteria": [
+      "Relevant sources retrieved",
+      "Claims supported by empirical evidence",
+      "Sources cited correctly with provenance",
+      "Contradictions between sources explicitly flagged"
+    ],
+    "metadata": {
+      "domain": "physics",
+      "keywords": [
+        "qubits",
+        "thresholds"
+      ]
+    }
+  },
+  {
+    "test_id": "RES-002",
+    "input": "Research the latest developments in transformer linear attention state-space models. Retrieve empirical sources and verify claim grounding.",
+    "expected_workflow": "research",
+    "required_capabilities": [
+      "web_search",
+      "evidence_extraction",
+      "grounding_verification",
+      "contradiction_detection"
+    ],
+    "success_criteria": [
+      "Relevant sources retrieved",
+      "Claims supported by empirical evidence",
+      "Sources cited correctly with provenance",
+      "Contradictions between sources explicitly flagged"
+    ],
+    "metadata": {
+      "domain": "ai",
+      "keywords": [
+        "mamba",
+        "complexity"
+      ]
+    }
+  },
+  {
+    "test_id": "RES-003",
+    "input": "Research the latest developments in crispr cas13 rna editing off-target effects. Retrieve empirical sources and verify claim grounding.",
+    "expected_workflow": "research",
+    "required_capabilities": [
+      "web_search",
+      "evidence_extraction",
+      "grounding_verification",
+      "contradiction_detection"
+    ],
+    "success_criteria": [
+      "Relevant sources retrieved",
+      "Claims supported by empirical evidence",
+      "Sources cited correctly with provenance",
+      "Contradictions between sources explicitly flagged"
+    ],
+    "metadata": {
+      "domain": "biotech",
+      "keywords": [
+        "specificity",
+        "delivery"
+      ]
+    }
+  },
+  {
+    "test_id": "RES-004",
+    "input": "Research the latest developments in zero knowledge rollup validity proofs ethereum. Retrieve empirical sources and verify claim grounding.",
+    "expected_workflow": "research",
+    "required_capabilities": [
+      "web_search",
+      "evidence_extraction",
+      "grounding_verification",
+      "contradiction_detection"
+    ],
+    "success_criteria": [
+      "Relevant sources retrieved",
+      "Claims supported by empirical evidence",
+      "Sources cited correctly with provenance",
+      "Contradictions between sources explicitly flagged"
+    ],
+    "metadata": {
+      "domain": "crypto",
+      "keywords": [
+        "starks",
+        "snarks"
+      ]
+    }
+  },
+  {
+    "test_id": "RES-005",
+    "input": "Research the latest developments in solid-state battery silicon anode degradation. Retrieve empirical sources and verify claim grounding.",
+    "expected_workflow": "research",
+    "required_capabilities": [
+      "web_search",
+      "evidence_extraction",
+      "grounding_verification",
+      "contradiction_detection"
+    ],
+    "success_criteria": [
+      "Relevant sources retrieved",
+      "Claims supported by empirical evidence",
+      "Sources cited correctly with provenance",
+      "Contradictions between sources explicitly flagged"
+    ],
+    "metadata": {
+      "domain": "materials",
+      "keywords": [
+        "capacity",
+        "electrolyte"
+      ]
+    }
+  },
+  {
+    "test_id": "RES-006",
+    "input": "Research the latest developments in mrna vaccine thermostability lipid nanoparticles. Retrieve empirical sources and verify claim grounding.",
+    "expected_workflow": "research",
+    "required_capabilities": [
+      "web_search",
+      "evidence_extraction",
+      "grounding_verification",
+      "contradiction_detection"
+    ],
+    "success_criteria": [
+      "Relevant sources retrieved",
+      "Claims supported by empirical evidence",
+      "Sources cited correctly with provenance",
+      "Contradictions between sources explicitly flagged"
+    ],
+    "metadata": {
+      "domain": "medicine",
+      "keywords": [
+        "storage",
+        "formulation"
+      ]
+    }
+  },
+  {
+    "test_id": "RES-007",
+    "input": "Research the latest developments in optical computing photonic matrix multiplication. Retrieve empirical sources and verify claim grounding.",
+    "expected_workflow": "research",
+    "required_capabilities": [
+      "web_search",
+      "evidence_extraction",
+      "grounding_verification",
+      "contradiction_detection"
+    ],
+    "success_criteria": [
+      "Relevant sources retrieved",
+      "Claims supported by empirical evidence",
+      "Sources cited correctly with provenance",
+      "Contradictions between sources explicitly flagged"
+    ],
+    "metadata": {
+      "domain": "hardware",
+      "keywords": [
+        "energy",
+        "latency"
+      ]
+    }
+  },
+  {
+    "test_id": "RES-008",
+    "input": "Research the latest developments in neuromorphic spike-timing dependent plasticity. Retrieve empirical sources and verify claim grounding.",
+    "expected_workflow": "research",
+    "required_capabilities": [
+      "web_search",
+      "evidence_extraction",
+      "grounding_verification",
+      "contradiction_detection"
+    ],
+    "success_criteria": [
+      "Relevant sources retrieved",
+      "Claims supported by empirical evidence",
+      "Sources cited correctly with provenance",
+      "Contradictions between sources explicitly flagged"
+    ],
+    "metadata": {
+      "domain": "neuroscience",
+      "keywords": [
+        "synaptic",
+        "memristors"
+      ]
+    }
+  },
+  {
+    "test_id": "RES-009",
+    "input": "Research the latest developments in direct air capture metal-organic frameworks. Retrieve empirical sources and verify claim grounding.",
+    "expected_workflow": "research",
+    "required_capabilities": [
+      "web_search",
+      "evidence_extraction",
+      "grounding_verification",
+      "contradiction_detection"
+    ],
+    "success_criteria": [
+      "Relevant sources retrieved",
+      "Claims supported by empirical evidence",
+      "Sources cited correctly with provenance",
+      "Contradictions between sources explicitly flagged"
+    ],
+    "metadata": {
+      "domain": "climate",
+      "keywords": [
+        "sorption",
+        "desorption"
+      ]
+    }
+  },
+  {
+    "test_id": "RES-010",
+    "input": "Research the latest developments in post-quantum cryptography lattice-based kyber. Retrieve empirical sources and verify claim grounding.",
+    "expected_workflow": "research",
+    "required_capabilities": [
+      "web_search",
+      "evidence_extraction",
+      "grounding_verification",
+      "contradiction_detection"
+    ],
+    "success_criteria": [
+      "Relevant sources retrieved",
+      "Claims supported by empirical evidence",
+      "Sources cited correctly with provenance",
+      "Contradictions between sources explicitly flagged"
+    ],
+    "metadata": {
+      "domain": "security",
+      "keywords": [
+        "nist",
+        "keysize"
+      ]
+    }
+  },
+  {
+    "test_id": "RES-011",
+    "input": "Research the latest developments in fusion energy high-temperature superconducting magnets. Retrieve empirical sources and verify claim grounding.",
+    "expected_workflow": "research",
+    "required_capabilities": [
+      "web_search",
+      "evidence_extraction",
+      "grounding_verification",
+      "contradiction_detection"
+    ],
+    "success_criteria": [
+      "Relevant sources retrieved",
+      "Claims supported by empirical evidence",
+      "Sources cited correctly with provenance",
+      "Contradictions between sources explicitly flagged"
+    ],
+    "metadata": {
+      "domain": "energy",
+      "keywords": [
+        "tokamak",
+        "confinement"
+      ]
+    }
+  },
+  {
+    "test_id": "RES-012",
+    "input": "Research the latest developments in synthetic biology metabolic engineering yeast terpenes. Retrieve empirical sources and verify claim grounding.",
+    "expected_workflow": "research",
+    "required_capabilities": [
+      "web_search",
+      "evidence_extraction",
+      "grounding_verification",
+      "contradiction_detection"
+    ],
+    "success_criteria": [
+      "Relevant sources retrieved",
+      "Claims supported by empirical evidence",
+      "Sources cited correctly with provenance",
+      "Contradictions between sources explicitly flagged"
+    ],
+    "metadata": {
+      "domain": "bioengineering",
+      "keywords": [
+        "pathway",
+        "yield"
+      ]
+    }
+  },
+  {
+    "test_id": "RES-013",
+    "input": "Research the latest developments in federated learning differential privacy gradient leakage. Retrieve empirical sources and verify claim grounding.",
+    "expected_workflow": "research",
+    "required_capabilities": [
+      "web_search",
+      "evidence_extraction",
+      "grounding_verification",
+      "contradiction_detection"
+    ],
+    "success_criteria": [
+      "Relevant sources retrieved",
+      "Claims supported by empirical evidence",
+      "Sources cited correctly with provenance",
+      "Contradictions between sources explicitly flagged"
+    ],
+    "metadata": {
+      "domain": "privacy",
+      "keywords": [
+        "epsilon",
+        "clipping"
+      ]
+    }
+  },
+  {
+    "test_id": "RES-014",
+    "input": "Research the latest developments in perovskite tandem solar cell durability halide migration. Retrieve empirical sources and verify claim grounding.",
+    "expected_workflow": "research",
+    "required_capabilities": [
+      "web_search",
+      "evidence_extraction",
+      "grounding_verification",
+      "contradiction_detection"
+    ],
+    "success_criteria": [
+      "Relevant sources retrieved",
+      "Claims supported by empirical evidence",
+      "Sources cited correctly with provenance",
+      "Contradictions between sources explicitly flagged"
+    ],
+    "metadata": {
+      "domain": "renewables",
+      "keywords": [
+        "efficiency",
+        "degradation"
+      ]
+    }
+  },
+  {
+    "test_id": "RES-015",
+    "input": "Research the latest developments in graph neural networks over-smoothing long-range. Retrieve empirical sources and verify claim grounding.",
+    "expected_workflow": "research",
+    "required_capabilities": [
+      "web_search",
+      "evidence_extraction",
+      "grounding_verification",
+      "contradiction_detection"
+    ],
+    "success_criteria": [
+      "Relevant sources retrieved",
+      "Claims supported by empirical evidence",
+      "Sources cited correctly with provenance",
+      "Contradictions between sources explicitly flagged"
+    ],
+    "metadata": {
+      "domain": "ml",
+      "keywords": [
+        "laplacian",
+        "rewiring"
+      ]
+    }
+  },
+  {
+    "test_id": "RES-016",
+    "input": "Research the latest developments in autonomous driving end-to-end vision-language-action. Retrieve empirical sources and verify claim grounding.",
+    "expected_workflow": "research",
+    "required_capabilities": [
+      "web_search",
+      "evidence_extraction",
+      "grounding_verification",
+      "contradiction_detection"
+    ],
+    "success_criteria": [
+      "Relevant sources retrieved",
+      "Claims supported by empirical evidence",
+      "Sources cited correctly with provenance",
+      "Contradictions between sources explicitly flagged"
+    ],
+    "metadata": {
+      "domain": "robotics",
+      "keywords": [
+        "imitation",
+        "teleoperation"
+      ]
+    }
+  },
+  {
+    "test_id": "RES-017",
+    "input": "Research the latest developments in organoid intelligence biological neural networks computing. Retrieve empirical sources and verify claim grounding.",
+    "expected_workflow": "research",
+    "required_capabilities": [
+      "web_search",
+      "evidence_extraction",
+      "grounding_verification",
+      "contradiction_detection"
+    ],
+    "success_criteria": [
+      "Relevant sources retrieved",
+      "Claims supported by empirical evidence",
+      "Sources cited correctly with provenance",
+      "Contradictions between sources explicitly flagged"
+    ],
+    "metadata": {
+      "domain": "bio-computing",
+      "keywords": [
+        "electrophysiology"
+      ]
+    }
+  },
+  {
+    "test_id": "RES-018",
+    "input": "Research the latest developments in carbon nanotube field-effect transistors sub-nanometer. Retrieve empirical sources and verify claim grounding.",
+    "expected_workflow": "research",
+    "required_capabilities": [
+      "web_search",
+      "evidence_extraction",
+      "grounding_verification",
+      "contradiction_detection"
+    ],
+    "success_criteria": [
+      "Relevant sources retrieved",
+      "Claims supported by empirical evidence",
+      "Sources cited correctly with provenance",
+      "Contradictions between sources explicitly flagged"
+    ],
+    "metadata": {
+      "domain": "semiconductors",
+      "keywords": [
+        "ballistic",
+        "gate"
+      ]
+    }
+  },
+  {
+    "test_id": "RES-019",
+    "input": "Research the latest developments in synthetic aperture radar satellite earth observation. Retrieve empirical sources and verify claim grounding.",
+    "expected_workflow": "research",
+    "required_capabilities": [
+      "web_search",
+      "evidence_extraction",
+      "grounding_verification",
+      "contradiction_detection"
+    ],
+    "success_criteria": [
+      "Relevant sources retrieved",
+      "Claims supported by empirical evidence",
+      "Sources cited correctly with provenance",
+      "Contradictions between sources explicitly flagged"
+    ],
+    "metadata": {
+      "domain": "aerospace",
+      "keywords": [
+        "interferometry",
+        "polarimetry"
+      ]
+    }
+  },
+  {
+    "test_id": "RES-020",
+    "input": "Research the latest developments in microbiome gut-brain axis neuroinflammation. Retrieve empirical sources and verify claim grounding.",
+    "expected_workflow": "research",
+    "required_capabilities": [
+      "web_search",
+      "evidence_extraction",
+      "grounding_verification",
+      "contradiction_detection"
+    ],
+    "success_criteria": [
+      "Relevant sources retrieved",
+      "Claims supported by empirical evidence",
+      "Sources cited correctly with provenance",
+      "Contradictions between sources explicitly flagged"
+    ],
+    "metadata": {
+      "domain": "microbiology",
+      "keywords": [
+        "vagus",
+        "short-chain"
+      ]
+    }
+  },
+  {
+    "test_id": "RES-021",
+    "input": "Research the latest developments in homomorphic encryption secure multi-party computation. Retrieve empirical sources and verify claim grounding.",
+    "expected_workflow": "research",
+    "required_capabilities": [
+      "web_search",
+      "evidence_extraction",
+      "grounding_verification",
+      "contradiction_detection"
+    ],
+    "success_criteria": [
+      "Relevant sources retrieved",
+      "Claims supported by empirical evidence",
+      "Sources cited correctly with provenance",
+      "Contradictions between sources explicitly flagged"
+    ],
+    "metadata": {
+      "domain": "cryptography",
+      "keywords": [
+        "bootstrapping",
+        "cipher"
+      ]
+    }
+  },
+  {
+    "test_id": "RES-022",
+    "input": "Research the latest developments in deep sea mineral mining environmental hydrothermal. Retrieve empirical sources and verify claim grounding.",
+    "expected_workflow": "research",
+    "required_capabilities": [
+      "web_search",
+      "evidence_extraction",
+      "grounding_verification",
+      "contradiction_detection"
+    ],
+    "success_criteria": [
+      "Relevant sources retrieved",
+      "Claims supported by empirical evidence",
+      "Sources cited correctly with provenance",
+      "Contradictions between sources explicitly flagged"
+    ],
+    "metadata": {
+      "domain": "oceanography",
+      "keywords": [
+        "benthic",
+        "plume"
+      ]
+    }
+  },
+  {
+    "test_id": "RES-023",
+    "input": "Research the latest developments in nanomaterial thermoelectric power generation waste heat. Retrieve empirical sources and verify claim grounding.",
+    "expected_workflow": "research",
+    "required_capabilities": [
+      "web_search",
+      "evidence_extraction",
+      "grounding_verification",
+      "contradiction_detection"
+    ],
+    "success_criteria": [
+      "Relevant sources retrieved",
+      "Claims supported by empirical evidence",
+      "Sources cited correctly with provenance",
+      "Contradictions between sources explicitly flagged"
+    ],
+    "metadata": {
+      "domain": "thermodynamics",
+      "keywords": [
+        "seebek",
+        "figure-of-merit"
+      ]
+    }
+  },
+  {
+    "test_id": "RES-024",
+    "input": "Research the latest developments in liquid biopsy circulating tumor dna early detection. Retrieve empirical sources and verify claim grounding.",
+    "expected_workflow": "research",
+    "required_capabilities": [
+      "web_search",
+      "evidence_extraction",
+      "grounding_verification",
+      "contradiction_detection"
+    ],
+    "success_criteria": [
+      "Relevant sources retrieved",
+      "Claims supported by empirical evidence",
+      "Sources cited correctly with provenance",
+      "Contradictions between sources explicitly flagged"
+    ],
+    "metadata": {
+      "domain": "oncology",
+      "keywords": [
+        "sensitivity",
+        "methylation"
+      ]
+    }
+  },
+  {
+    "test_id": "RES-025",
+    "input": "Research the latest developments in high-entropy alloys radiation damage resistance nuclear. Retrieve empirical sources and verify claim grounding.",
+    "expected_workflow": "research",
+    "required_capabilities": [
+      "web_search",
+      "evidence_extraction",
+      "grounding_verification",
+      "contradiction_detection"
+    ],
+    "success_criteria": [
+      "Relevant sources retrieved",
+      "Claims supported by empirical evidence",
+      "Sources cited correctly with provenance",
+      "Contradictions between sources explicitly flagged"
+    ],
+    "metadata": {
+      "domain": "metallurgy",
+      "keywords": [
+        "dislocation",
+        "swelling"
+      ]
+    }
+  },
+  {
+    "test_id": "COD-001",
+    "input": "Write a Python script to compute average dataset values and handle division by zero",
+    "expected_workflow": "coding",
+    "required_capabilities": [
+      "sandbox_execution",
+      "test_generation",
+      "automated_debugging",
+      "unit_testing"
+    ],
+    "success_criteria": [
+      "Code executes cleanly inside sandbox",
+      "All generated unit tests pass",
+      "Exceptions diagnosed and patched if errors occur",
+      "Final implementation verified against edge cases"
+    ],
+    "metadata": {
+      "language": "python",
+      "category": "arithmetic"
+    }
+  },
+  {
+    "test_id": "COD-002",
+    "input": "Implement an LRU cache with O(1) get and put in Python",
+    "expected_workflow": "coding",
+    "required_capabilities": [
+      "sandbox_execution",
+      "test_generation",
+      "automated_debugging",
+      "unit_testing"
+    ],
+    "success_criteria": [
+      "Code executes cleanly inside sandbox",
+      "All generated unit tests pass",
+      "Exceptions diagnosed and patched if errors occur",
+      "Final implementation verified against edge cases"
+    ],
+    "metadata": {
+      "language": "python",
+      "category": "data_structures"
+    }
+  },
+  {
+    "test_id": "COD-003",
+    "input": "Write a script to validate and parse SemVer semantic version strings",
+    "expected_workflow": "coding",
+    "required_capabilities": [
+      "sandbox_execution",
+      "test_generation",
+      "automated_debugging",
+      "unit_testing"
+    ],
+    "success_criteria": [
+      "Code executes cleanly inside sandbox",
+      "All generated unit tests pass",
+      "Exceptions diagnosed and patched if errors occur",
+      "Final implementation verified against edge cases"
+    ],
+    "metadata": {
+      "language": "python",
+      "category": "parsers"
+    }
+  },
+  {
+    "test_id": "COD-004",
+    "input": "Implement a thread-safe connection pool with lease timeouts",
+    "expected_workflow": "coding",
+    "required_capabilities": [
+      "sandbox_execution",
+      "test_generation",
+      "automated_debugging",
+      "unit_testing"
+    ],
+    "success_criteria": [
+      "Code executes cleanly inside sandbox",
+      "All generated unit tests pass",
+      "Exceptions diagnosed and patched if errors occur",
+      "Final implementation verified against edge cases"
+    ],
+    "metadata": {
+      "language": "python",
+      "category": "concurrency"
+    }
+  },
+  {
+    "test_id": "COD-005",
+    "input": "Write a rate limiter using the sliding window log algorithm",
+    "expected_workflow": "coding",
+    "required_capabilities": [
+      "sandbox_execution",
+      "test_generation",
+      "automated_debugging",
+      "unit_testing"
+    ],
+    "success_criteria": [
+      "Code executes cleanly inside sandbox",
+      "All generated unit tests pass",
+      "Exceptions diagnosed and patched if errors occur",
+      "Final implementation verified against edge cases"
+    ],
+    "metadata": {
+      "language": "python",
+      "category": "networking"
+    }
+  },
+  {
+    "test_id": "COD-006",
+    "input": "Create a function to parse CSV stream without loading entire file in memory",
+    "expected_workflow": "coding",
+    "required_capabilities": [
+      "sandbox_execution",
+      "test_generation",
+      "automated_debugging",
+      "unit_testing"
+    ],
+    "success_criteria": [
+      "Code executes cleanly inside sandbox",
+      "All generated unit tests pass",
+      "Exceptions diagnosed and patched if errors occur",
+      "Final implementation verified against edge cases"
+    ],
+    "metadata": {
+      "language": "python",
+      "category": "io"
+    }
+  },
+  {
+    "test_id": "COD-007",
+    "input": "Implement a red-black tree rotation and balance checking routine",
+    "expected_workflow": "coding",
+    "required_capabilities": [
+      "sandbox_execution",
+      "test_generation",
+      "automated_debugging",
+      "unit_testing"
+    ],
+    "success_criteria": [
+      "Code executes cleanly inside sandbox",
+      "All generated unit tests pass",
+      "Exceptions diagnosed and patched if errors occur",
+      "Final implementation verified against edge cases"
+    ],
+    "metadata": {
+      "language": "python",
+      "category": "algorithms"
+    }
+  },
+  {
+    "test_id": "COD-008",
+    "input": "Write a JSON schema validator for nested user profiles",
+    "expected_workflow": "coding",
+    "required_capabilities": [
+      "sandbox_execution",
+      "test_generation",
+      "automated_debugging",
+      "unit_testing"
+    ],
+    "success_criteria": [
+      "Code executes cleanly inside sandbox",
+      "All generated unit tests pass",
+      "Exceptions diagnosed and patched if errors occur",
+      "Final implementation verified against edge cases"
+    ],
+    "metadata": {
+      "language": "python",
+      "category": "validation"
+    }
+  },
+  {
+    "test_id": "COD-009",
+    "input": "Implement an async worker queue with exponential backoff retries",
+    "expected_workflow": "coding",
+    "required_capabilities": [
+      "sandbox_execution",
+      "test_generation",
+      "automated_debugging",
+      "unit_testing"
+    ],
+    "success_criteria": [
+      "Code executes cleanly inside sandbox",
+      "All generated unit tests pass",
+      "Exceptions diagnosed and patched if errors occur",
+      "Final implementation verified against edge cases"
+    ],
+    "metadata": {
+      "language": "python",
+      "category": "async"
+    }
+  },
+  {
+    "test_id": "COD-010",
+    "input": "Write a Python script to compress data using Run-Length Encoding",
+    "expected_workflow": "coding",
+    "required_capabilities": [
+      "sandbox_execution",
+      "test_generation",
+      "automated_debugging",
+      "unit_testing"
+    ],
+    "success_criteria": [
+      "Code executes cleanly inside sandbox",
+      "All generated unit tests pass",
+      "Exceptions diagnosed and patched if errors occur",
+      "Final implementation verified against edge cases"
+    ],
+    "metadata": {
+      "language": "python",
+      "category": "compression"
+    }
+  },
+  {
+    "test_id": "COD-011",
+    "input": "Implement a topological sort on a directed acyclic task graph",
+    "expected_workflow": "coding",
+    "required_capabilities": [
+      "sandbox_execution",
+      "test_generation",
+      "automated_debugging",
+      "unit_testing"
+    ],
+    "success_criteria": [
+      "Code executes cleanly inside sandbox",
+      "All generated unit tests pass",
+      "Exceptions diagnosed and patched if errors occur",
+      "Final implementation verified against edge cases"
+    ],
+    "metadata": {
+      "language": "python",
+      "category": "graphs"
+    }
+  },
+  {
+    "test_id": "COD-012",
+    "input": "Write a script to compute Levenshtein distance between strings with matrix memoization",
+    "expected_workflow": "coding",
+    "required_capabilities": [
+      "sandbox_execution",
+      "test_generation",
+      "automated_debugging",
+      "unit_testing"
+    ],
+    "success_criteria": [
+      "Code executes cleanly inside sandbox",
+      "All generated unit tests pass",
+      "Exceptions diagnosed and patched if errors occur",
+      "Final implementation verified against edge cases"
+    ],
+    "metadata": {
+      "language": "python",
+      "category": "strings"
+    }
+  },
+  {
+    "test_id": "COD-013",
+    "input": "Implement a secure PBKDF2 password hasher with salt generation",
+    "expected_workflow": "coding",
+    "required_capabilities": [
+      "sandbox_execution",
+      "test_generation",
+      "automated_debugging",
+      "unit_testing"
+    ],
+    "success_criteria": [
+      "Code executes cleanly inside sandbox",
+      "All generated unit tests pass",
+      "Exceptions diagnosed and patched if errors occur",
+      "Final implementation verified against edge cases"
+    ],
+    "metadata": {
+      "language": "python",
+      "category": "security"
+    }
+  },
+  {
+    "test_id": "COD-014",
+    "input": "Write a memory-mapped file reader for huge binary datasets",
+    "expected_workflow": "coding",
+    "required_capabilities": [
+      "sandbox_execution",
+      "test_generation",
+      "automated_debugging",
+      "unit_testing"
+    ],
+    "success_criteria": [
+      "Code executes cleanly inside sandbox",
+      "All generated unit tests pass",
+      "Exceptions diagnosed and patched if errors occur",
+      "Final implementation verified against edge cases"
+    ],
+    "metadata": {
+      "language": "python",
+      "category": "systems"
+    }
+  },
+  {
+    "test_id": "COD-015",
+    "input": "Implement a priority queue using a min-heap structure",
+    "expected_workflow": "coding",
+    "required_capabilities": [
+      "sandbox_execution",
+      "test_generation",
+      "automated_debugging",
+      "unit_testing"
+    ],
+    "success_criteria": [
+      "Code executes cleanly inside sandbox",
+      "All generated unit tests pass",
+      "Exceptions diagnosed and patched if errors occur",
+      "Final implementation verified against edge cases"
+    ],
+    "metadata": {
+      "language": "python",
+      "category": "heaps"
+    }
+  },
+  {
+    "test_id": "COD-016",
+    "input": "Write a Python decorator for memoization with TTL expiration",
+    "expected_workflow": "coding",
+    "required_capabilities": [
+      "sandbox_execution",
+      "test_generation",
+      "automated_debugging",
+      "unit_testing"
+    ],
+    "success_criteria": [
+      "Code executes cleanly inside sandbox",
+      "All generated unit tests pass",
+      "Exceptions diagnosed and patched if errors occur",
+      "Final implementation verified against edge cases"
+    ],
+    "metadata": {
+      "language": "python",
+      "category": "meta"
+    }
+  },
+  {
+    "test_id": "COD-017",
+    "input": "Implement a Trie prefix tree with autocomplete prefix matching",
+    "expected_workflow": "coding",
+    "required_capabilities": [
+      "sandbox_execution",
+      "test_generation",
+      "automated_debugging",
+      "unit_testing"
+    ],
+    "success_criteria": [
+      "Code executes cleanly inside sandbox",
+      "All generated unit tests pass",
+      "Exceptions diagnosed and patched if errors occur",
+      "Final implementation verified against edge cases"
+    ],
+    "metadata": {
+      "language": "python",
+      "category": "trees"
+    }
+  },
+  {
+    "test_id": "COD-018",
+    "input": "Write a script to evaluate mathematical expressions using Dijkstra's Shunting-yard",
+    "expected_workflow": "coding",
+    "required_capabilities": [
+      "sandbox_execution",
+      "test_generation",
+      "automated_debugging",
+      "unit_testing"
+    ],
+    "success_criteria": [
+      "Code executes cleanly inside sandbox",
+      "All generated unit tests pass",
+      "Exceptions diagnosed and patched if errors occur",
+      "Final implementation verified against edge cases"
+    ],
+    "metadata": {
+      "language": "python",
+      "category": "parsers"
+    }
+  },
+  {
+    "test_id": "COD-019",
+    "input": "Implement a circular buffer with overwriting on overflow",
+    "expected_workflow": "coding",
+    "required_capabilities": [
+      "sandbox_execution",
+      "test_generation",
+      "automated_debugging",
+      "unit_testing"
+    ],
+    "success_criteria": [
+      "Code executes cleanly inside sandbox",
+      "All generated unit tests pass",
+      "Exceptions diagnosed and patched if errors occur",
+      "Final implementation verified against edge cases"
+    ],
+    "metadata": {
+      "language": "python",
+      "category": "buffers"
+    }
+  },
+  {
+    "test_id": "COD-020",
+    "input": "Write a Python script to compute SHA-256 Merkle root of a list of transactions",
+    "expected_workflow": "coding",
+    "required_capabilities": [
+      "sandbox_execution",
+      "test_generation",
+      "automated_debugging",
+      "unit_testing"
+    ],
+    "success_criteria": [
+      "Code executes cleanly inside sandbox",
+      "All generated unit tests pass",
+      "Exceptions diagnosed and patched if errors occur",
+      "Final implementation verified against edge cases"
+    ],
+    "metadata": {
+      "language": "python",
+      "category": "crypto"
+    }
+  },
+  {
+    "test_id": "COD-021",
+    "input": "Implement a basic finite state machine with transition guard conditions",
+    "expected_workflow": "coding",
+    "required_capabilities": [
+      "sandbox_execution",
+      "test_generation",
+      "automated_debugging",
+      "unit_testing"
+    ],
+    "success_criteria": [
+      "Code executes cleanly inside sandbox",
+      "All generated unit tests pass",
+      "Exceptions diagnosed and patched if errors occur",
+      "Final implementation verified against edge cases"
+    ],
+    "metadata": {
+      "language": "python",
+      "category": "fsm"
+    }
+  },
+  {
+    "test_id": "COD-022",
+    "input": "Write a script to detect cycles in an undirected graph using Disjoint Set Union",
+    "expected_workflow": "coding",
+    "required_capabilities": [
+      "sandbox_execution",
+      "test_generation",
+      "automated_debugging",
+      "unit_testing"
+    ],
+    "success_criteria": [
+      "Code executes cleanly inside sandbox",
+      "All generated unit tests pass",
+      "Exceptions diagnosed and patched if errors occur",
+      "Final implementation verified against edge cases"
+    ],
+    "metadata": {
+      "language": "python",
+      "category": "graphs"
+    }
+  },
+  {
+    "test_id": "COD-023",
+    "input": "Implement a streaming moving average with window size k",
+    "expected_workflow": "coding",
+    "required_capabilities": [
+      "sandbox_execution",
+      "test_generation",
+      "automated_debugging",
+      "unit_testing"
+    ],
+    "success_criteria": [
+      "Code executes cleanly inside sandbox",
+      "All generated unit tests pass",
+      "Exceptions diagnosed and patched if errors occur",
+      "Final implementation verified against edge cases"
+    ],
+    "metadata": {
+      "language": "python",
+      "category": "stream"
+    }
+  },
+  {
+    "test_id": "COD-024",
+    "input": "Write an interval tree for finding overlapping calendar events",
+    "expected_workflow": "coding",
+    "required_capabilities": [
+      "sandbox_execution",
+      "test_generation",
+      "automated_debugging",
+      "unit_testing"
+    ],
+    "success_criteria": [
+      "Code executes cleanly inside sandbox",
+      "All generated unit tests pass",
+      "Exceptions diagnosed and patched if errors occur",
+      "Final implementation verified against edge cases"
+    ],
+    "metadata": {
+      "language": "python",
+      "category": "intervals"
+    }
+  },
+  {
+    "test_id": "COD-025",
+    "input": "Implement a consistent hashing ring with virtual nodes",
+    "expected_workflow": "coding",
+    "required_capabilities": [
+      "sandbox_execution",
+      "test_generation",
+      "automated_debugging",
+      "unit_testing"
+    ],
+    "success_criteria": [
+      "Code executes cleanly inside sandbox",
+      "All generated unit tests pass",
+      "Exceptions diagnosed and patched if errors occur",
+      "Final implementation verified against edge cases"
+    ],
+    "metadata": {
+      "language": "python",
+      "category": "distributed"
+    }
+  },
+  {
+    "test_id": "DAT-001",
+    "input": "Analyze this CSV and tell me whether treatment and control groups are statistically different",
+    "expected_workflow": "data_analysis",
+    "required_capabilities": [
+      "schema_inspection",
+      "trap_detection",
+      "hypothesis_testing",
+      "visualization"
+    ],
+    "success_criteria": [
+      "Schema and missing values inspected",
+      "Statistical traps detected (e.g. correlation vs causation, small sample size)",
+      "Appropriate statistical method selected (e.g. Welch's t-test)",
+      "Visual summary and effect sizes reported"
+    ],
+    "metadata": {
+      "domain": "ab_testing"
+    }
+  },
+  {
+    "test_id": "DAT-002",
+    "input": "Inspect customer churn dataset, check missing values, and test correlation with tenure",
+    "expected_workflow": "data_analysis",
+    "required_capabilities": [
+      "schema_inspection",
+      "trap_detection",
+      "hypothesis_testing",
+      "visualization"
+    ],
+    "success_criteria": [
+      "Schema and missing values inspected",
+      "Statistical traps detected (e.g. correlation vs causation, small sample size)",
+      "Appropriate statistical method selected (e.g. Welch's t-test)",
+      "Visual summary and effect sizes reported"
+    ],
+    "metadata": {
+      "domain": "churn"
+    }
+  },
+  {
+    "test_id": "DAT-003",
+    "input": "Evaluate sales conversion rates across 3 marketing channels and test variance significance",
+    "expected_workflow": "data_analysis",
+    "required_capabilities": [
+      "schema_inspection",
+      "trap_detection",
+      "hypothesis_testing",
+      "visualization"
+    ],
+    "success_criteria": [
+      "Schema and missing values inspected",
+      "Statistical traps detected (e.g. correlation vs causation, small sample size)",
+      "Appropriate statistical method selected (e.g. Welch's t-test)",
+      "Visual summary and effect sizes reported"
+    ],
+    "metadata": {
+      "domain": "marketing"
+    }
+  },
+  {
+    "test_id": "DAT-004",
+    "input": "Analyze latency metrics between v1 and v2 microservices and detect performance anomalies",
+    "expected_workflow": "data_analysis",
+    "required_capabilities": [
+      "schema_inspection",
+      "trap_detection",
+      "hypothesis_testing",
+      "visualization"
+    ],
+    "success_criteria": [
+      "Schema and missing values inspected",
+      "Statistical traps detected (e.g. correlation vs causation, small sample size)",
+      "Appropriate statistical method selected (e.g. Welch's t-test)",
+      "Visual summary and effect sizes reported"
+    ],
+    "metadata": {
+      "domain": "infra"
+    }
+  },
+  {
+    "test_id": "DAT-005",
+    "input": "Assess employee satisfaction survey results and test for response bias",
+    "expected_workflow": "data_analysis",
+    "required_capabilities": [
+      "schema_inspection",
+      "trap_detection",
+      "hypothesis_testing",
+      "visualization"
+    ],
+    "success_criteria": [
+      "Schema and missing values inspected",
+      "Statistical traps detected (e.g. correlation vs causation, small sample size)",
+      "Appropriate statistical method selected (e.g. Welch's t-test)",
+      "Visual summary and effect sizes reported"
+    ],
+    "metadata": {
+      "domain": "survey"
+    }
+  },
+  {
+    "test_id": "DAT-006",
+    "input": "Check clinical trial patient blood pressure dataset before and after medication",
+    "expected_workflow": "data_analysis",
+    "required_capabilities": [
+      "schema_inspection",
+      "trap_detection",
+      "hypothesis_testing",
+      "visualization"
+    ],
+    "success_criteria": [
+      "Schema and missing values inspected",
+      "Statistical traps detected (e.g. correlation vs causation, small sample size)",
+      "Appropriate statistical method selected (e.g. Welch's t-test)",
+      "Visual summary and effect sizes reported"
+    ],
+    "metadata": {
+      "domain": "clinical"
+    }
+  },
+  {
+    "test_id": "DAT-007",
+    "input": "Analyze ecommerce cart abandonment rates by device type and test hypothesis",
+    "expected_workflow": "data_analysis",
+    "required_capabilities": [
+      "schema_inspection",
+      "trap_detection",
+      "hypothesis_testing",
+      "visualization"
+    ],
+    "success_criteria": [
+      "Schema and missing values inspected",
+      "Statistical traps detected (e.g. correlation vs causation, small sample size)",
+      "Appropriate statistical method selected (e.g. Welch's t-test)",
+      "Visual summary and effect sizes reported"
+    ],
+    "metadata": {
+      "domain": "ecommerce"
+    }
+  },
+  {
+    "test_id": "DAT-008",
+    "input": "Examine server CPU utilization distribution and detect peak hour anomalies",
+    "expected_workflow": "data_analysis",
+    "required_capabilities": [
+      "schema_inspection",
+      "trap_detection",
+      "hypothesis_testing",
+      "visualization"
+    ],
+    "success_criteria": [
+      "Schema and missing values inspected",
+      "Statistical traps detected (e.g. correlation vs causation, small sample size)",
+      "Appropriate statistical method selected (e.g. Welch's t-test)",
+      "Visual summary and effect sizes reported"
+    ],
+    "metadata": {
+      "domain": "telemetry"
+    }
+  },
+  {
+    "test_id": "DAT-009",
+    "input": "Test whether educational test scores differ significantly by classroom teaching method",
+    "expected_workflow": "data_analysis",
+    "required_capabilities": [
+      "schema_inspection",
+      "trap_detection",
+      "hypothesis_testing",
+      "visualization"
+    ],
+    "success_criteria": [
+      "Schema and missing values inspected",
+      "Statistical traps detected (e.g. correlation vs causation, small sample size)",
+      "Appropriate statistical method selected (e.g. Welch's t-test)",
+      "Visual summary and effect sizes reported"
+    ],
+    "metadata": {
+      "domain": "education"
+    }
+  },
+  {
+    "test_id": "DAT-010",
+    "input": "Analyze app user session duration dataset and check for skewness and power law fit",
+    "expected_workflow": "data_analysis",
+    "required_capabilities": [
+      "schema_inspection",
+      "trap_detection",
+      "hypothesis_testing",
+      "visualization"
+    ],
+    "success_criteria": [
+      "Schema and missing values inspected",
+      "Statistical traps detected (e.g. correlation vs causation, small sample size)",
+      "Appropriate statistical method selected (e.g. Welch's t-test)",
+      "Visual summary and effect sizes reported"
+    ],
+    "metadata": {
+      "domain": "product"
+    }
+  },
+  {
+    "test_id": "DAT-011",
+    "input": "Inspect sensor vibration time series and detect outlier frequency components",
+    "expected_workflow": "data_analysis",
+    "required_capabilities": [
+      "schema_inspection",
+      "trap_detection",
+      "hypothesis_testing",
+      "visualization"
+    ],
+    "success_criteria": [
+      "Schema and missing values inspected",
+      "Statistical traps detected (e.g. correlation vs causation, small sample size)",
+      "Appropriate statistical method selected (e.g. Welch's t-test)",
+      "Visual summary and effect sizes reported"
+    ],
+    "metadata": {
+      "domain": "iot"
+    }
+  },
+  {
+    "test_id": "DAT-012",
+    "input": "Evaluate financial loan default rates across risk categories with contingency table",
+    "expected_workflow": "data_analysis",
+    "required_capabilities": [
+      "schema_inspection",
+      "trap_detection",
+      "hypothesis_testing",
+      "visualization"
+    ],
+    "success_criteria": [
+      "Schema and missing values inspected",
+      "Statistical traps detected (e.g. correlation vs causation, small sample size)",
+      "Appropriate statistical method selected (e.g. Welch's t-test)",
+      "Visual summary and effect sizes reported"
+    ],
+    "metadata": {
+      "domain": "finance"
+    }
+  },
+  {
+    "test_id": "DAT-013",
+    "input": "Analyze customer support ticket resolution times and test whether tier-2 takes longer",
+    "expected_workflow": "data_analysis",
+    "required_capabilities": [
+      "schema_inspection",
+      "trap_detection",
+      "hypothesis_testing",
+      "visualization"
+    ],
+    "success_criteria": [
+      "Schema and missing values inspected",
+      "Statistical traps detected (e.g. correlation vs causation, small sample size)",
+      "Appropriate statistical method selected (e.g. Welch's t-test)",
+      "Visual summary and effect sizes reported"
+    ],
+    "metadata": {
+      "domain": "support"
+    }
+  },
+  {
+    "test_id": "DAT-014",
+    "input": "Examine warehouse inventory turnover rates and identify slow-moving stock clusters",
+    "expected_workflow": "data_analysis",
+    "required_capabilities": [
+      "schema_inspection",
+      "trap_detection",
+      "hypothesis_testing",
+      "visualization"
+    ],
+    "success_criteria": [
+      "Schema and missing values inspected",
+      "Statistical traps detected (e.g. correlation vs causation, small sample size)",
+      "Appropriate statistical method selected (e.g. Welch's t-test)",
+      "Visual summary and effect sizes reported"
+    ],
+    "metadata": {
+      "domain": "logistics"
+    }
+  },
+  {
+    "test_id": "DAT-015",
+    "input": "Test whether website dark mode increases reading time statistically significantly",
+    "expected_workflow": "data_analysis",
+    "required_capabilities": [
+      "schema_inspection",
+      "trap_detection",
+      "hypothesis_testing",
+      "visualization"
+    ],
+    "success_criteria": [
+      "Schema and missing values inspected",
+      "Statistical traps detected (e.g. correlation vs causation, small sample size)",
+      "Appropriate statistical method selected (e.g. Welch's t-test)",
+      "Visual summary and effect sizes reported"
+    ],
+    "metadata": {
+      "domain": "ux"
+    }
+  },
+  {
+    "test_id": "DAT-016",
+    "input": "Analyze energy consumption data across summer months and test variance homogeneity",
+    "expected_workflow": "data_analysis",
+    "required_capabilities": [
+      "schema_inspection",
+      "trap_detection",
+      "hypothesis_testing",
+      "visualization"
+    ],
+    "success_criteria": [
+      "Schema and missing values inspected",
+      "Statistical traps detected (e.g. correlation vs causation, small sample size)",
+      "Appropriate statistical method selected (e.g. Welch's t-test)",
+      "Visual summary and effect sizes reported"
+    ],
+    "metadata": {
+      "domain": "energy"
+    }
+  },
+  {
+    "test_id": "DAT-017",
+    "input": "Inspect ad click-through rates across demographics and flag low statistical power samples",
+    "expected_workflow": "data_analysis",
+    "required_capabilities": [
+      "schema_inspection",
+      "trap_detection",
+      "hypothesis_testing",
+      "visualization"
+    ],
+    "success_criteria": [
+      "Schema and missing values inspected",
+      "Statistical traps detected (e.g. correlation vs causation, small sample size)",
+      "Appropriate statistical method selected (e.g. Welch's t-test)",
+      "Visual summary and effect sizes reported"
+    ],
+    "metadata": {
+      "domain": "ads"
+    }
+  },
+  {
+    "test_id": "DAT-018",
+    "input": "Analyze network packet loss percentages under high vs low load conditions",
+    "expected_workflow": "data_analysis",
+    "required_capabilities": [
+      "schema_inspection",
+      "trap_detection",
+      "hypothesis_testing",
+      "visualization"
+    ],
+    "success_criteria": [
+      "Schema and missing values inspected",
+      "Statistical traps detected (e.g. correlation vs causation, small sample size)",
+      "Appropriate statistical method selected (e.g. Welch's t-test)",
+      "Visual summary and effect sizes reported"
+    ],
+    "metadata": {
+      "domain": "networking"
+    }
+  },
+  {
+    "test_id": "DAT-019",
+    "input": "Evaluate patient recovery days across two surgical techniques with effect sizes",
+    "expected_workflow": "data_analysis",
+    "required_capabilities": [
+      "schema_inspection",
+      "trap_detection",
+      "hypothesis_testing",
+      "visualization"
+    ],
+    "success_criteria": [
+      "Schema and missing values inspected",
+      "Statistical traps detected (e.g. correlation vs causation, small sample size)",
+      "Appropriate statistical method selected (e.g. Welch's t-test)",
+      "Visual summary and effect sizes reported"
+    ],
+    "metadata": {
+      "domain": "healthcare"
+    }
+  },
+  {
+    "test_id": "DAT-020",
+    "input": "Analyze manufacturing defect counts per batch and test Poisson distribution fit",
+    "expected_workflow": "data_analysis",
+    "required_capabilities": [
+      "schema_inspection",
+      "trap_detection",
+      "hypothesis_testing",
+      "visualization"
+    ],
+    "success_criteria": [
+      "Schema and missing values inspected",
+      "Statistical traps detected (e.g. correlation vs causation, small sample size)",
+      "Appropriate statistical method selected (e.g. Welch's t-test)",
+      "Visual summary and effect sizes reported"
+    ],
+    "metadata": {
+      "domain": "manufacturing"
+    }
+  },
+  {
+    "test_id": "DOC-001",
+    "input": "Create a detailed technical report on Project Orion architecture and performance benchmarks",
+    "expected_workflow": "document",
+    "required_capabilities": [
+      "fact_extraction",
+      "outline_generation",
+      "consistency_checking",
+      "inspection_gate"
+    ],
+    "success_criteria": [
+      "Numerical facts extracted from sources",
+      "Multi-section structured outline created",
+      "Numerical consistency verified across sections",
+      "Dedicated document inspection passed (no broken tables or unclosed code fences)"
+    ],
+    "metadata": {
+      "doc_type": "tech_report"
+    }
+  },
+  {
+    "test_id": "DOC-002",
+    "input": "Generate an engineering design document for the new event-driven message bus",
+    "expected_workflow": "document",
+    "required_capabilities": [
+      "fact_extraction",
+      "outline_generation",
+      "consistency_checking",
+      "inspection_gate"
+    ],
+    "success_criteria": [
+      "Numerical facts extracted from sources",
+      "Multi-section structured outline created",
+      "Numerical consistency verified across sections",
+      "Dedicated document inspection passed (no broken tables or unclosed code fences)"
+    ],
+    "metadata": {
+      "doc_type": "design_doc"
+    }
+  },
+  {
+    "test_id": "DOC-003",
+    "input": "Produce a system architecture review document with SLA and latency guarantees",
+    "expected_workflow": "document",
+    "required_capabilities": [
+      "fact_extraction",
+      "outline_generation",
+      "consistency_checking",
+      "inspection_gate"
+    ],
+    "success_criteria": [
+      "Numerical facts extracted from sources",
+      "Multi-section structured outline created",
+      "Numerical consistency verified across sections",
+      "Dedicated document inspection passed (no broken tables or unclosed code fences)"
+    ],
+    "metadata": {
+      "doc_type": "architecture"
+    }
+  },
+  {
+    "test_id": "DOC-004",
+    "input": "Draft an incident postmortem report for the recent Redis cluster failover outage",
+    "expected_workflow": "document",
+    "required_capabilities": [
+      "fact_extraction",
+      "outline_generation",
+      "consistency_checking",
+      "inspection_gate"
+    ],
+    "success_criteria": [
+      "Numerical facts extracted from sources",
+      "Multi-section structured outline created",
+      "Numerical consistency verified across sections",
+      "Dedicated document inspection passed (no broken tables or unclosed code fences)"
+    ],
+    "metadata": {
+      "doc_type": "postmortem"
+    }
+  },
+  {
+    "test_id": "DOC-005",
+    "input": "Create a security compliance audit report detailing RBAC and credential rotation policies",
+    "expected_workflow": "document",
+    "required_capabilities": [
+      "fact_extraction",
+      "outline_generation",
+      "consistency_checking",
+      "inspection_gate"
+    ],
+    "success_criteria": [
+      "Numerical facts extracted from sources",
+      "Multi-section structured outline created",
+      "Numerical consistency verified across sections",
+      "Dedicated document inspection passed (no broken tables or unclosed code fences)"
+    ],
+    "metadata": {
+      "doc_type": "security_audit"
+    }
+  },
+  {
+    "test_id": "DOC-006",
+    "input": "Generate an API specification document for external partner integration endpoints",
+    "expected_workflow": "document",
+    "required_capabilities": [
+      "fact_extraction",
+      "outline_generation",
+      "consistency_checking",
+      "inspection_gate"
+    ],
+    "success_criteria": [
+      "Numerical facts extracted from sources",
+      "Multi-section structured outline created",
+      "Numerical consistency verified across sections",
+      "Dedicated document inspection passed (no broken tables or unclosed code fences)"
+    ],
+    "metadata": {
+      "doc_type": "api_spec"
+    }
+  },
+  {
+    "test_id": "DOC-007",
+    "input": "Write an infrastructure scaling guide for high-throughput container deployments",
+    "expected_workflow": "document",
+    "required_capabilities": [
+      "fact_extraction",
+      "outline_generation",
+      "consistency_checking",
+      "inspection_gate"
+    ],
+    "success_criteria": [
+      "Numerical facts extracted from sources",
+      "Multi-section structured outline created",
+      "Numerical consistency verified across sections",
+      "Dedicated document inspection passed (no broken tables or unclosed code fences)"
+    ],
+    "metadata": {
+      "doc_type": "infra_guide"
+    }
+  },
+  {
+    "test_id": "DOC-008",
+    "input": "Draft a technical whitepaper on zero-trust microservice communication architecture",
+    "expected_workflow": "document",
+    "required_capabilities": [
+      "fact_extraction",
+      "outline_generation",
+      "consistency_checking",
+      "inspection_gate"
+    ],
+    "success_criteria": [
+      "Numerical facts extracted from sources",
+      "Multi-section structured outline created",
+      "Numerical consistency verified across sections",
+      "Dedicated document inspection passed (no broken tables or unclosed code fences)"
+    ],
+    "metadata": {
+      "doc_type": "whitepaper"
+    }
+  },
+  {
+    "test_id": "DOC-009",
+    "input": "Create a disaster recovery specification with RTO and RPO benchmarks",
+    "expected_workflow": "document",
+    "required_capabilities": [
+      "fact_extraction",
+      "outline_generation",
+      "consistency_checking",
+      "inspection_gate"
+    ],
+    "success_criteria": [
+      "Numerical facts extracted from sources",
+      "Multi-section structured outline created",
+      "Numerical consistency verified across sections",
+      "Dedicated document inspection passed (no broken tables or unclosed code fences)"
+    ],
+    "metadata": {
+      "doc_type": "dr_spec"
+    }
+  },
+  {
+    "test_id": "DOC-010",
+    "input": "Produce a performance tuning guide for PostgreSQL database indexing and query plans",
+    "expected_workflow": "document",
+    "required_capabilities": [
+      "fact_extraction",
+      "outline_generation",
+      "consistency_checking",
+      "inspection_gate"
+    ],
+    "success_criteria": [
+      "Numerical facts extracted from sources",
+      "Multi-section structured outline created",
+      "Numerical consistency verified across sections",
+      "Dedicated document inspection passed (no broken tables or unclosed code fences)"
+    ],
+    "metadata": {
+      "doc_type": "db_guide"
+    }
+  },
+  {
+    "test_id": "DOC-011",
+    "input": "Draft an engineering RFC proposing adoption of distributed tracing across services",
+    "expected_workflow": "document",
+    "required_capabilities": [
+      "fact_extraction",
+      "outline_generation",
+      "consistency_checking",
+      "inspection_gate"
+    ],
+    "success_criteria": [
+      "Numerical facts extracted from sources",
+      "Multi-section structured outline created",
+      "Numerical consistency verified across sections",
+      "Dedicated document inspection passed (no broken tables or unclosed code fences)"
+    ],
+    "metadata": {
+      "doc_type": "rfc"
+    }
+  },
+  {
+    "test_id": "DOC-012",
+    "input": "Generate a release notes document summarizing major features, bug fixes, and breaking changes",
+    "expected_workflow": "document",
+    "required_capabilities": [
+      "fact_extraction",
+      "outline_generation",
+      "consistency_checking",
+      "inspection_gate"
+    ],
+    "success_criteria": [
+      "Numerical facts extracted from sources",
+      "Multi-section structured outline created",
+      "Numerical consistency verified across sections",
+      "Dedicated document inspection passed (no broken tables or unclosed code fences)"
+    ],
+    "metadata": {
+      "doc_type": "release_notes"
+    }
+  },
+  {
+    "test_id": "DOC-013",
+    "input": "Create an operational runbook for diagnosing and mitigating high memory leaks",
+    "expected_workflow": "document",
+    "required_capabilities": [
+      "fact_extraction",
+      "outline_generation",
+      "consistency_checking",
+      "inspection_gate"
+    ],
+    "success_criteria": [
+      "Numerical facts extracted from sources",
+      "Multi-section structured outline created",
+      "Numerical consistency verified across sections",
+      "Dedicated document inspection passed (no broken tables or unclosed code fences)"
+    ],
+    "metadata": {
+      "doc_type": "runbook"
+    }
+  },
+  {
+    "test_id": "DOC-014",
+    "input": "Produce a data governance and privacy policy document for multi-tenant storage",
+    "expected_workflow": "document",
+    "required_capabilities": [
+      "fact_extraction",
+      "outline_generation",
+      "consistency_checking",
+      "inspection_gate"
+    ],
+    "success_criteria": [
+      "Numerical facts extracted from sources",
+      "Multi-section structured outline created",
+      "Numerical consistency verified across sections",
+      "Dedicated document inspection passed (no broken tables or unclosed code fences)"
+    ],
+    "metadata": {
+      "doc_type": "governance"
+    }
+  },
+  {
+    "test_id": "DOC-015",
+    "input": "Draft a microservices migration plan document with phase gates and rollback criteria",
+    "expected_workflow": "document",
+    "required_capabilities": [
+      "fact_extraction",
+      "outline_generation",
+      "consistency_checking",
+      "inspection_gate"
+    ],
+    "success_criteria": [
+      "Numerical facts extracted from sources",
+      "Multi-section structured outline created",
+      "Numerical consistency verified across sections",
+      "Dedicated document inspection passed (no broken tables or unclosed code fences)"
+    ],
+    "metadata": {
+      "doc_type": "migration"
+    }
+  },
+  {
+    "test_id": "DOC-016",
+    "input": "Generate an evaluation report comparing LLM inference latency and cost profiles",
+    "expected_workflow": "document",
+    "required_capabilities": [
+      "fact_extraction",
+      "outline_generation",
+      "consistency_checking",
+      "inspection_gate"
+    ],
+    "success_criteria": [
+      "Numerical facts extracted from sources",
+      "Multi-section structured outline created",
+      "Numerical consistency verified across sections",
+      "Dedicated document inspection passed (no broken tables or unclosed code fences)"
+    ],
+    "metadata": {
+      "doc_type": "eval_report"
+    }
+  },
+  {
+    "test_id": "DOC-017",
+    "input": "Write a formal technical proposal for implementing vector database indexing",
+    "expected_workflow": "document",
+    "required_capabilities": [
+      "fact_extraction",
+      "outline_generation",
+      "consistency_checking",
+      "inspection_gate"
+    ],
+    "success_criteria": [
+      "Numerical facts extracted from sources",
+      "Multi-section structured outline created",
+      "Numerical consistency verified across sections",
+      "Dedicated document inspection passed (no broken tables or unclosed code fences)"
+    ],
+    "metadata": {
+      "doc_type": "proposal"
+    }
+  },
+  {
+    "test_id": "DOC-018",
+    "input": "Draft a service level agreement (SLA) specification for enterprise tier clients",
+    "expected_workflow": "document",
+    "required_capabilities": [
+      "fact_extraction",
+      "outline_generation",
+      "consistency_checking",
+      "inspection_gate"
+    ],
+    "success_criteria": [
+      "Numerical facts extracted from sources",
+      "Multi-section structured outline created",
+      "Numerical consistency verified across sections",
+      "Dedicated document inspection passed (no broken tables or unclosed code fences)"
+    ],
+    "metadata": {
+      "doc_type": "sla_spec"
+    }
+  },
+  {
+    "test_id": "DOC-019",
+    "input": "Create an integration guide for developers embedding our webhook subscriptions",
+    "expected_workflow": "document",
+    "required_capabilities": [
+      "fact_extraction",
+      "outline_generation",
+      "consistency_checking",
+      "inspection_gate"
+    ],
+    "success_criteria": [
+      "Numerical facts extracted from sources",
+      "Multi-section structured outline created",
+      "Numerical consistency verified across sections",
+      "Dedicated document inspection passed (no broken tables or unclosed code fences)"
+    ],
+    "metadata": {
+      "doc_type": "integration_guide"
+    }
+  },
+  {
+    "test_id": "DOC-020",
+    "input": "Produce an engineering quality scorecard report covering unit and integration pass rates",
+    "expected_workflow": "document",
+    "required_capabilities": [
+      "fact_extraction",
+      "outline_generation",
+      "consistency_checking",
+      "inspection_gate"
+    ],
+    "success_criteria": [
+      "Numerical facts extracted from sources",
+      "Multi-section structured outline created",
+      "Numerical consistency verified across sections",
+      "Dedicated document inspection passed (no broken tables or unclosed code fences)"
+    ],
+    "metadata": {
+      "doc_type": "scorecard"
+    }
+  },
+  {
+    "test_id": "DIA-001",
+    "input": "Why is my MCP server failing? Check logs, isolate the root cause, and propose a fix",
+    "expected_workflow": "diagnostics",
+    "required_capabilities": [
+      "log_collection",
+      "root_cause_taxonomy",
+      "hitl_approval_gate",
+      "recovery_verification"
+    ],
+    "success_criteria": [
+      "System health checks and log traces collected",
+      "Failing component isolated and classified into reliability taxonomy",
+      "Mutating remediations require explicit HITL approval",
+      "Recovery verified post-remediation"
+    ],
+    "metadata": {
+      "issue_type": "mcp_failure"
+    }
+  },
+  {
+    "test_id": "DIA-002",
+    "input": "Investigate why vector search queries are timing out under concurrent user load",
+    "expected_workflow": "diagnostics",
+    "required_capabilities": [
+      "log_collection",
+      "root_cause_taxonomy",
+      "hitl_approval_gate",
+      "recovery_verification"
+    ],
+    "success_criteria": [
+      "System health checks and log traces collected",
+      "Failing component isolated and classified into reliability taxonomy",
+      "Mutating remediations require explicit HITL approval",
+      "Recovery verified post-remediation"
+    ],
+    "metadata": {
+      "issue_type": "vector_timeout"
+    }
+  },
+  {
+    "test_id": "DIA-003",
+    "input": "Diagnose high memory consumption in the Python worker pool and identify leak sources",
+    "expected_workflow": "diagnostics",
+    "required_capabilities": [
+      "log_collection",
+      "root_cause_taxonomy",
+      "hitl_approval_gate",
+      "recovery_verification"
+    ],
+    "success_criteria": [
+      "System health checks and log traces collected",
+      "Failing component isolated and classified into reliability taxonomy",
+      "Mutating remediations require explicit HITL approval",
+      "Recovery verified post-remediation"
+    ],
+    "metadata": {
+      "issue_type": "memory_leak"
+    }
+  },
+  {
+    "test_id": "DIA-004",
+    "input": "Determine why PostgreSQL connections are exhausting connection pool limits",
+    "expected_workflow": "diagnostics",
+    "required_capabilities": [
+      "log_collection",
+      "root_cause_taxonomy",
+      "hitl_approval_gate",
+      "recovery_verification"
+    ],
+    "success_criteria": [
+      "System health checks and log traces collected",
+      "Failing component isolated and classified into reliability taxonomy",
+      "Mutating remediations require explicit HITL approval",
+      "Recovery verified post-remediation"
+    ],
+    "metadata": {
+      "issue_type": "db_pool"
+    }
+  },
+  {
+    "test_id": "DIA-005",
+    "input": "Troubleshoot Redis queue latency spikes during peak scheduled automation runs",
+    "expected_workflow": "diagnostics",
+    "required_capabilities": [
+      "log_collection",
+      "root_cause_taxonomy",
+      "hitl_approval_gate",
+      "recovery_verification"
+    ],
+    "success_criteria": [
+      "System health checks and log traces collected",
+      "Failing component isolated and classified into reliability taxonomy",
+      "Mutating remediations require explicit HITL approval",
+      "Recovery verified post-remediation"
+    ],
+    "metadata": {
+      "issue_type": "redis_latency"
+    }
+  },
+  {
+    "test_id": "DIA-006",
+    "input": "Investigate why authentication tokens are unexpectedly expiring prematurely",
+    "expected_workflow": "diagnostics",
+    "required_capabilities": [
+      "log_collection",
+      "root_cause_taxonomy",
+      "hitl_approval_gate",
+      "recovery_verification"
+    ],
+    "success_criteria": [
+      "System health checks and log traces collected",
+      "Failing component isolated and classified into reliability taxonomy",
+      "Mutating remediations require explicit HITL approval",
+      "Recovery verified post-remediation"
+    ],
+    "metadata": {
+      "issue_type": "auth_expiry"
+    }
+  },
+  {
+    "test_id": "DIA-007",
+    "input": "Diagnose sandbox container execution failures with non-zero exit code 137",
+    "expected_workflow": "diagnostics",
+    "required_capabilities": [
+      "log_collection",
+      "root_cause_taxonomy",
+      "hitl_approval_gate",
+      "recovery_verification"
+    ],
+    "success_criteria": [
+      "System health checks and log traces collected",
+      "Failing component isolated and classified into reliability taxonomy",
+      "Mutating remediations require explicit HITL approval",
+      "Recovery verified post-remediation"
+    ],
+    "metadata": {
+      "issue_type": "container_oom"
+    }
+  },
+  {
+    "test_id": "DIA-008",
+    "input": "Identify why grounding verification is intermittently rejecting valid source URLs",
+    "expected_workflow": "diagnostics",
+    "required_capabilities": [
+      "log_collection",
+      "root_cause_taxonomy",
+      "hitl_approval_gate",
+      "recovery_verification"
+    ],
+    "success_criteria": [
+      "System health checks and log traces collected",
+      "Failing component isolated and classified into reliability taxonomy",
+      "Mutating remediations require explicit HITL approval",
+      "Recovery verified post-remediation"
+    ],
+    "metadata": {
+      "issue_type": "grounding_rejection"
+    }
+  },
+  {
+    "test_id": "DIA-009",
+    "input": "Troubleshoot rate limiter blocking legitimate user requests during burst traffic",
+    "expected_workflow": "diagnostics",
+    "required_capabilities": [
+      "log_collection",
+      "root_cause_taxonomy",
+      "hitl_approval_gate",
+      "recovery_verification"
+    ],
+    "success_criteria": [
+      "System health checks and log traces collected",
+      "Failing component isolated and classified into reliability taxonomy",
+      "Mutating remediations require explicit HITL approval",
+      "Recovery verified post-remediation"
+    ],
+    "metadata": {
+      "issue_type": "rate_limiter"
+    }
+  },
+  {
+    "test_id": "DIA-010",
+    "input": "Investigate why Kafka consumer lag is steadily growing on the audit stream topic",
+    "expected_workflow": "diagnostics",
+    "required_capabilities": [
+      "log_collection",
+      "root_cause_taxonomy",
+      "hitl_approval_gate",
+      "recovery_verification"
+    ],
+    "success_criteria": [
+      "System health checks and log traces collected",
+      "Failing component isolated and classified into reliability taxonomy",
+      "Mutating remediations require explicit HITL approval",
+      "Recovery verified post-remediation"
+    ],
+    "metadata": {
+      "issue_type": "consumer_lag"
+    }
+  },
+  {
+    "test_id": "DIA-011",
+    "input": "Diagnose cross-tenant data leak warnings triggered by the security audit logger",
+    "expected_workflow": "diagnostics",
+    "required_capabilities": [
+      "log_collection",
+      "root_cause_taxonomy",
+      "hitl_approval_gate",
+      "recovery_verification"
+    ],
+    "success_criteria": [
+      "System health checks and log traces collected",
+      "Failing component isolated and classified into reliability taxonomy",
+      "Mutating remediations require explicit HITL approval",
+      "Recovery verified post-remediation"
+    ],
+    "metadata": {
+      "issue_type": "security_leak"
+    }
+  },
+  {
+    "test_id": "DIA-012",
+    "input": "Troubleshoot SSL certificate handshake termination errors on the ingress gateway",
+    "expected_workflow": "diagnostics",
+    "required_capabilities": [
+      "log_collection",
+      "root_cause_taxonomy",
+      "hitl_approval_gate",
+      "recovery_verification"
+    ],
+    "success_criteria": [
+      "System health checks and log traces collected",
+      "Failing component isolated and classified into reliability taxonomy",
+      "Mutating remediations require explicit HITL approval",
+      "Recovery verified post-remediation"
+    ],
+    "metadata": {
+      "issue_type": "gateway_ssl"
+    }
+  },
+  {
+    "test_id": "DIA-013",
+    "input": "Identify why the regression test synthesizer is failing on empty diff inputs",
+    "expected_workflow": "diagnostics",
+    "required_capabilities": [
+      "log_collection",
+      "root_cause_taxonomy",
+      "hitl_approval_gate",
+      "recovery_verification"
+    ],
+    "success_criteria": [
+      "System health checks and log traces collected",
+      "Failing component isolated and classified into reliability taxonomy",
+      "Mutating remediations require explicit HITL approval",
+      "Recovery verified post-remediation"
+    ],
+    "metadata": {
+      "issue_type": "synthesizer_fail"
+    }
+  },
+  {
+    "test_id": "DIA-014",
+    "input": "Diagnose circuit breaker remaining in OPEN state after external API recovered",
+    "expected_workflow": "diagnostics",
+    "required_capabilities": [
+      "log_collection",
+      "root_cause_taxonomy",
+      "hitl_approval_gate",
+      "recovery_verification"
+    ],
+    "success_criteria": [
+      "System health checks and log traces collected",
+      "Failing component isolated and classified into reliability taxonomy",
+      "Mutating remediations require explicit HITL approval",
+      "Recovery verified post-remediation"
+    ],
+    "metadata": {
+      "issue_type": "circuit_breaker"
+    }
+  },
+  {
+    "test_id": "DIA-015",
+    "input": "Investigate high CPU usage in the full-text search indexing background worker",
+    "expected_workflow": "diagnostics",
+    "required_capabilities": [
+      "log_collection",
+      "root_cause_taxonomy",
+      "hitl_approval_gate",
+      "recovery_verification"
+    ],
+    "success_criteria": [
+      "System health checks and log traces collected",
+      "Failing component isolated and classified into reliability taxonomy",
+      "Mutating remediations require explicit HITL approval",
+      "Recovery verified post-remediation"
+    ],
+    "metadata": {
+      "issue_type": "cpu_spike"
+    }
+  },
+  {
+    "test_id": "DIA-016",
+    "input": "Troubleshoot file permission denied errors when saving artifacts to storage",
+    "expected_workflow": "diagnostics",
+    "required_capabilities": [
+      "log_collection",
+      "root_cause_taxonomy",
+      "hitl_approval_gate",
+      "recovery_verification"
+    ],
+    "success_criteria": [
+      "System health checks and log traces collected",
+      "Failing component isolated and classified into reliability taxonomy",
+      "Mutating remediations require explicit HITL approval",
+      "Recovery verified post-remediation"
+    ],
+    "metadata": {
+      "issue_type": "permission_denied"
+    }
+  },
+  {
+    "test_id": "DIA-017",
+    "input": "Diagnose why WebSocket streaming disconnects after 60 seconds of client inactivity",
+    "expected_workflow": "diagnostics",
+    "required_capabilities": [
+      "log_collection",
+      "root_cause_taxonomy",
+      "hitl_approval_gate",
+      "recovery_verification"
+    ],
+    "success_criteria": [
+      "System health checks and log traces collected",
+      "Failing component isolated and classified into reliability taxonomy",
+      "Mutating remediations require explicit HITL approval",
+      "Recovery verified post-remediation"
+    ],
+    "metadata": {
+      "issue_type": "websocket_drop"
+    }
+  },
+  {
+    "test_id": "DIA-018",
+    "input": "Investigate why Mem0 vector retrieval returns stale facts for updated profiles",
+    "expected_workflow": "diagnostics",
+    "required_capabilities": [
+      "log_collection",
+      "root_cause_taxonomy",
+      "hitl_approval_gate",
+      "recovery_verification"
+    ],
+    "success_criteria": [
+      "System health checks and log traces collected",
+      "Failing component isolated and classified into reliability taxonomy",
+      "Mutating remediations require explicit HITL approval",
+      "Recovery verified post-remediation"
+    ],
+    "metadata": {
+      "issue_type": "stale_memory"
+    }
+  },
+  {
+    "test_id": "DIA-019",
+    "input": "Troubleshoot unexpected HTTP 502 Bad Gateway responses from downstream LLM proxy",
+    "expected_workflow": "diagnostics",
+    "required_capabilities": [
+      "log_collection",
+      "root_cause_taxonomy",
+      "hitl_approval_gate",
+      "recovery_verification"
+    ],
+    "success_criteria": [
+      "System health checks and log traces collected",
+      "Failing component isolated and classified into reliability taxonomy",
+      "Mutating remediations require explicit HITL approval",
+      "Recovery verified post-remediation"
+    ],
+    "metadata": {
+      "issue_type": "llm_proxy_502"
+    }
+  },
+  {
+    "test_id": "DIA-020",
+    "input": "Diagnose failure in the HITL approval webhook notification dispatch queue",
+    "expected_workflow": "diagnostics",
+    "required_capabilities": [
+      "log_collection",
+      "root_cause_taxonomy",
+      "hitl_approval_gate",
+      "recovery_verification"
+    ],
+    "success_criteria": [
+      "System health checks and log traces collected",
+      "Failing component isolated and classified into reliability taxonomy",
+      "Mutating remediations require explicit HITL approval",
+      "Recovery verified post-remediation"
+    ],
+    "metadata": {
+      "issue_type": "hitl_webhook"
+    }
+  },
+  {
+    "test_id": "AUT-001",
+    "input": "Research three open-source vector databases (Qdrant, Milvus, Chroma), benchmark their performance, and generate a comparative report",
+    "expected_workflow": "autonomous",
+    "required_capabilities": [
+      "dag_planning",
+      "cycle_validation",
+      "topological_batching",
+      "composite_artifact_assembly"
+    ],
+    "success_criteria": [
+      "Multi-step objective decomposed into acyclic Task DAG",
+      "Independent subtasks executed concurrently in topological batches",
+      "Subtask outputs verified and aggregated",
+      "Comprehensive final composite artifact assembled"
+    ],
+    "metadata": {
+      "goal": "vector_db_comparison"
+    }
+  },
+  {
+    "test_id": "AUT-002",
+    "input": "Decompose our monolithic auth module, plan migration to OAuth2/OIDC, write tests, and generate transition guide",
+    "expected_workflow": "autonomous",
+    "required_capabilities": [
+      "dag_planning",
+      "cycle_validation",
+      "topological_batching",
+      "composite_artifact_assembly"
+    ],
+    "success_criteria": [
+      "Multi-step objective decomposed into acyclic Task DAG",
+      "Independent subtasks executed concurrently in topological batches",
+      "Subtask outputs verified and aggregated",
+      "Comprehensive final composite artifact assembled"
+    ],
+    "metadata": {
+      "goal": "auth_migration"
+    }
+  },
+  {
+    "test_id": "AUT-003",
+    "input": "Evaluate three cloud deployment providers for LLM hosting, calculate cost per million tokens, and compile recommendations",
+    "expected_workflow": "autonomous",
+    "required_capabilities": [
+      "dag_planning",
+      "cycle_validation",
+      "topological_batching",
+      "composite_artifact_assembly"
+    ],
+    "success_criteria": [
+      "Multi-step objective decomposed into acyclic Task DAG",
+      "Independent subtasks executed concurrently in topological batches",
+      "Subtask outputs verified and aggregated",
+      "Comprehensive final composite artifact assembled"
+    ],
+    "metadata": {
+      "goal": "cloud_evaluation"
+    }
+  },
+  {
+    "test_id": "AUT-004",
+    "input": "Audit system security across 5 endpoints, run penetration tests, patch vulnerabilities, and compile audit report",
+    "expected_workflow": "autonomous",
+    "required_capabilities": [
+      "dag_planning",
+      "cycle_validation",
+      "topological_batching",
+      "composite_artifact_assembly"
+    ],
+    "success_criteria": [
+      "Multi-step objective decomposed into acyclic Task DAG",
+      "Independent subtasks executed concurrently in topological batches",
+      "Subtask outputs verified and aggregated",
+      "Comprehensive final composite artifact assembled"
+    ],
+    "metadata": {
+      "goal": "security_remediation"
+    }
+  },
+  {
+    "test_id": "AUT-005",
+    "input": "Analyze customer feedback from three channels, perform sentiment clustering, and draft product roadmap proposals",
+    "expected_workflow": "autonomous",
+    "required_capabilities": [
+      "dag_planning",
+      "cycle_validation",
+      "topological_batching",
+      "composite_artifact_assembly"
+    ],
+    "success_criteria": [
+      "Multi-step objective decomposed into acyclic Task DAG",
+      "Independent subtasks executed concurrently in topological batches",
+      "Subtask outputs verified and aggregated",
+      "Comprehensive final composite artifact assembled"
+    ],
+    "metadata": {
+      "goal": "product_roadmap"
+    }
+  },
+  {
+    "test_id": "AUT-006",
+    "input": "Design an automated ETL pipeline, implement Python extraction workers, validate schema outputs, and export documentation",
+    "expected_workflow": "autonomous",
+    "required_capabilities": [
+      "dag_planning",
+      "cycle_validation",
+      "topological_batching",
+      "composite_artifact_assembly"
+    ],
+    "success_criteria": [
+      "Multi-step objective decomposed into acyclic Task DAG",
+      "Independent subtasks executed concurrently in topological batches",
+      "Subtask outputs verified and aggregated",
+      "Comprehensive final composite artifact assembled"
+    ],
+    "metadata": {
+      "goal": "etl_pipeline"
+    }
+  },
+  {
+    "test_id": "AUT-007",
+    "input": "Investigate top 3 LLM prompt injection techniques, generate defensive guardrail unit tests, and publish defense whitepaper",
+    "expected_workflow": "autonomous",
+    "required_capabilities": [
+      "dag_planning",
+      "cycle_validation",
+      "topological_batching",
+      "composite_artifact_assembly"
+    ],
+    "success_criteria": [
+      "Multi-step objective decomposed into acyclic Task DAG",
+      "Independent subtasks executed concurrently in topological batches",
+      "Subtask outputs verified and aggregated",
+      "Comprehensive final composite artifact assembled"
+    ],
+    "metadata": {
+      "goal": "guardrail_defense"
+    }
+  },
+  {
+    "test_id": "AUT-008",
+    "input": "Perform architectural review of microservices, identify circular dependencies, propose decoupled event buses, and write RFC",
+    "expected_workflow": "autonomous",
+    "required_capabilities": [
+      "dag_planning",
+      "cycle_validation",
+      "topological_batching",
+      "composite_artifact_assembly"
+    ],
+    "success_criteria": [
+      "Multi-step objective decomposed into acyclic Task DAG",
+      "Independent subtasks executed concurrently in topological batches",
+      "Subtask outputs verified and aggregated",
+      "Comprehensive final composite artifact assembled"
+    ],
+    "metadata": {
+      "goal": "arch_refactor"
+    }
+  },
+  {
+    "test_id": "AUT-009",
+    "input": "Benchmark SQLite vs PostgreSQL for session caching under high write loads, analyze statistical differences, and draft guide",
+    "expected_workflow": "autonomous",
+    "required_capabilities": [
+      "dag_planning",
+      "cycle_validation",
+      "topological_batching",
+      "composite_artifact_assembly"
+    ],
+    "success_criteria": [
+      "Multi-step objective decomposed into acyclic Task DAG",
+      "Independent subtasks executed concurrently in topological batches",
+      "Subtask outputs verified and aggregated",
+      "Comprehensive final composite artifact assembled"
+    ],
+    "metadata": {
+      "goal": "db_benchmark"
+    }
+  },
+  {
+    "test_id": "AUT-010",
+    "input": "Synthesize complete disaster recovery plan: analyze failure modes, build automated recovery scripts, and create drill runbook",
+    "expected_workflow": "autonomous",
+    "required_capabilities": [
+      "dag_planning",
+      "cycle_validation",
+      "topological_batching",
+      "composite_artifact_assembly"
+    ],
+    "success_criteria": [
+      "Multi-step objective decomposed into acyclic Task DAG",
+      "Independent subtasks executed concurrently in topological batches",
+      "Subtask outputs verified and aggregated",
+      "Comprehensive final composite artifact assembled"
+    ],
+    "metadata": {
+      "goal": "dr_plan"
+    }
+  }
+]

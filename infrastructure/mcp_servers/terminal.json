@@ -1,0 +1,30 @@
+{
+  "name": "terminal",
+  "transport": "stdio",
+  "command": "python",
+  "args": ["-m", "src.mcp_servers.terminal_server"],
+  "risk_level": "high",
+  "timeout_seconds": 30,
+  "tools": [
+    {
+      "name": "terminal.run",
+      "description": "Run a non-interactive shell command inside the workspace directory.",
+      "parameters": {
+        "type": "object",
+        "properties": { "command": { "type": "string" } },
+        "required": ["command"]
+      }
+    },
+    {
+      "name": "terminal.delete_file",
+      "description": "Delete a file permanently from the workspace. (High-risk action, requires confirmation).",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "path": { "type": "string", "description": "Relative path to file in workspace" }
+        },
+        "required": ["path"]
+      }
+    }
+  ]
+}

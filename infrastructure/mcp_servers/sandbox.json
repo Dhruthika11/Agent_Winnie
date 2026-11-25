@@ -1,0 +1,29 @@
+{
+  "name": "sandbox",
+  "transport": "sse",
+  "base_url": "http://127.0.0.1:8005/sse",
+  "risk_level": "medium",
+  "timeout_seconds": 25,
+  "tools": [
+    {
+      "name": "run_sandboxed_code",
+      "description": "Execute arbitrary Python or Bash code inside an isolated, sandboxed runner. Use for calculations, data analysis, or code inspection.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "language": {
+            "type": "string",
+            "enum": ["python", "bash"],
+            "description": "Language runtime for snippet execution",
+            "default": "python"
+          },
+          "code": {
+            "type": "string",
+            "description": "Source code to execute inside the sandbox"
+          }
+        },
+        "required": ["language", "code"]
+      }
+    }
+  ]
+}

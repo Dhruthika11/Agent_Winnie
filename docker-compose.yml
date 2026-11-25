@@ -1,0 +1,138 @@
+version: "3.9"
+
+services:
+  vllm:
+    image: vllm/vllm-openai:latest
+    container_name: hermes-vllm
+    runtime: nvidia
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    environment:
+      - HUGGING_FACE_HUB_TOKEN=${HF_TOKEN}
+    volumes:
+      - ./infrastructure/vllm/serve.sh:/serve.sh
+      - hf_cache:/root/.cache/huggingface
+    entrypoint: ["bash", "/serve.sh"]
+    ports:
+      - "8000:8000"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  litellm:
+    image: ghcr.io/berriai/litellm:main-latest
+    container_name: hermes-litellm
+    volumes:
+      - ./infrastructure/litellm/config.yaml:/app/config.yaml
+    command: ["--config", "/app/config.yaml", "--port", "4000"]
+    ports:
+      - "4000:4000"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:4000/health/readiness"]
+      interval: 15s
+      timeout: 3s
+      retries: 3
+      start_period: 10s
+    env_file:
+      - .env
+    environment:
+      - REDIS_URL=redis://redis:6379/0
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    depends_on:
+      - redis
+
+  redis:
+    image: redis:7-alpine
+    container_name: hermes-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+
+  postgres:
+    image: postgres:16-alpine
+    container_name: hermes-postgres
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER:-hermes}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-hermes}
+      - POSTGRES_DB=${POSTGRES_DB:-hermes_agent}
+    ports:
+      - "5432:5432"
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+
+  langfuse:
+    image: langfuse/langfuse:2
+    container_name: hermes-langfuse
+    depends_on:
+      - postgres
+    environment:
+      - DATABASE_URL=postgresql://${POSTGRES_USER:-hermes}:${POSTGRES_PASSWORD:-hermes}@postgres:5432/${POSTGRES_DB:-hermes_agent}
+      - NEXTAUTH_SECRET=${LANGFUSE_NEXTAUTH_SECRET:-change-me}
+      - NEXTAUTH_URL=http://localhost:3000
+      - SALT=${LANGFUSE_SALT:-change-me}
+    ports:
+      - "3000:3000"
+
+  qdrant:
+    image: qdrant/qdrant:latest
+    container_name: hermes-qdrant
+    ports:
+      - "6334:6333"
+    volumes:
+      - qdrant_data:/qdrant/storage
+
+  sandbox-mcp:
+    build:
+      context: .
+      dockerfile: Dockerfile.sandbox
+    container_name: hermes-sandbox-mcp
+    restart: unless-stopped
+    ports:
+      - "8005:8005"
+    environment:
+      - SANDBOX_TRANSPORT=sse
+      - SANDBOX_HOST=0.0.0.0
+      - SANDBOX_PORT=8005
+    mem_limit: 512m
+    cpus: 1.0
+
+  agent:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: hermes-agent
+    depends_on:
+      - litellm
+      - redis
+      - postgres
+      - qdrant
+      - sandbox-mcp
+    env_file:
+      - .env
+    environment:
+      - LITELLM_BASE_URL=http://litellm:4000
+      - REDIS_URL=redis://redis:6379/0
+      - POSTGRES_URL=postgresql://${POSTGRES_USER:-hermes}:${POSTGRES_PASSWORD:-hermes}@postgres:5432/${POSTGRES_DB:-hermes_agent}
+      - SANDBOX_MCP_URL=http://sandbox-mcp:8005/sse
+      - MEM0_VECTOR_STORE_URL=http://qdrant:6333
+    command: ["uvicorn", "src.main:app", "--host", "0.0.0.0", "--port", "8080"]
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./src:/app/src
+      - ./infrastructure:/app/infrastructure
+
+volumes:
+  hf_cache:
+  redis_data:
+  pg_data:
+  qdrant_data:

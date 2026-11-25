@@ -1,0 +1,42 @@
+# LiteLLM proxy config: presents a single OpenAI-compatible endpoint to the
+# agent, in front of one or more vLLM backends, with retries/fallbacks and
+# basic cost tracking.
+model_list:
+  - model_name: groq/qwen/qwen3.8-27b
+    litellm_params:
+      model: groq/qwen/qwen3.8-27b
+      api_key: os.environ/GROQ_API_KEY
+
+  - model_name: groq/openai/gpt-oss-120b
+    litellm_params:
+      model: groq/openai/gpt-oss-120b
+      api_key: os.environ/GROQ_API_KEY
+
+  - model_name: groq/openai/gpt-oss-20b
+    litellm_params:
+      model: groq/openai/gpt-oss-20b
+      api_key: os.environ/GROQ_API_KEY
+
+  - model_name: hermes-agent
+    litellm_params:
+      model: groq/openai/gpt-oss-120b
+      api_key: os.environ/GROQ_API_KEY
+
+  - model_name: hermes-agent-fallback
+    litellm_params:
+      model: groq/openai/gpt-oss-20b
+      api_key: os.environ/GROQ_API_KEY
+
+router_settings:
+  routing_strategy: latency-based-routing
+  num_retries: 2
+  timeout: 45
+  fallbacks:
+    - hermes-agent: ["hermes-agent-fallback"]
+
+general_settings:
+  master_key: sk-litellm-master
+
+litellm_settings:
+  drop_params: true
+  set_verbose: false

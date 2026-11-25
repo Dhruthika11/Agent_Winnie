@@ -1,0 +1,2370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Winnie MCP Control Hub | Model Context Protocol</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #FFFFFF;
+      --card-bg: #FFFFFF;
+      --card-hover: #F8FAFC;
+      --border: #E2E8F0;
+      --border-glow: rgba(2, 132, 199, 0.25);
+      --primary: #0284C7;
+      --primary-hover: #0369A1;
+      --accent: #7C3AED;
+      --success: #059669;
+      --warning: #D97706;
+      --danger: #DC2626;
+      --text: #0F172A;
+      --text-muted: #64748B;
+      --text-dim: #94A3B8;
+      --font: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      --mono: 'JetBrains Mono', monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: var(--bg);
+      background-image: 
+        radial-gradient(circle at 10% 5%, rgba(2, 132, 199, 0.04) 0%, transparent 40%),
+        radial-gradient(circle at 90% 10%, rgba(124, 58, 237, 0.04) 0%, transparent 40%),
+        radial-gradient(circle at 50% 90%, rgba(5, 150, 105, 0.03) 0%, transparent 50%);
+      background-attachment: fixed;
+      color: var(--text);
+      font-family: var(--font);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Top Navigation */
+    header {
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 1rem 2.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+    }
+
+    .logo-bubbles {
+      width: 32px;
+      height: 32px;
+      position: relative;
+    }
+
+    .logo-dot-1 {
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      background: #000;
+      border-radius: 50%;
+      top: 0;
+      left: 0;
+    }
+
+    .logo-dot-2 {
+      position: absolute;
+      width: 14px;
+      height: 14px;
+      background: #000;
+      border-radius: 50%;
+      bottom: 2px;
+      right: 2px;
+    }
+
+    .logo-dot-3 {
+      position: absolute;
+      width: 9px;
+      height: 9px;
+      background: #000;
+      border-radius: 50%;
+      bottom: 0;
+      left: 4px;
+    }
+
+    .brand-text h1 {
+      font-size: 1.25rem;
+      font-weight: 800;
+      letter-spacing: -0.4px;
+      color: #0F172A;
+    }
+
+    .badge-mcp {
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 0.25rem 0.6rem;
+      border-radius: 6px;
+      background: #E0F2FE;
+      color: #0369A1;
+      border: 1px solid #BAE6FD;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+    }
+
+    .header-link {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.86rem;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.45rem 0.8rem;
+      border-radius: 8px;
+      transition: all 0.2s;
+    }
+
+    .header-link:hover {
+      color: var(--text);
+      background: #F1F5F9;
+    }
+
+    .header-link-primary {
+      color: #000;
+      background: #000;
+      color: #FFF !important;
+      font-weight: 600;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+    }
+    .header-link-primary:hover {
+      background: #333 !important;
+    }
+
+    /* Navigation Tabs */
+    .nav-tabs {
+      display: flex;
+      gap: 0.4rem;
+      background: #F1F5F9;
+      padding: 0.35rem;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+    }
+
+    .tab-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      padding: 0.5rem 1.15rem;
+      font-size: 0.86rem;
+      font-weight: 500;
+      border-radius: 8px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.2s;
+    }
+
+    .tab-btn:hover { color: var(--text); }
+    .tab-btn.active {
+      background: #FFFFFF;
+      color: #000;
+      font-weight: 700;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    }
+
+    /* Main Container */
+    main {
+      flex: 1;
+      max-width: 1400px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 2.5rem;
+    }
+
+    /* Hero / Stat banner */
+    .hero-banner {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 2.25rem;
+    }
+
+    .stat-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+      padding: 1.35rem 1.5rem;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      transition: all 0.2s;
+    }
+
+    .stat-card:hover {
+      border-color: #CBD5E1;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.05);
+    }
+
+    .stat-icon {
+      width: 46px;
+      height: 46px;
+      border-radius: 12px;
+      background: #F8FAFC;
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+    }
+
+    .stat-value {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: #0F172A;
+      letter-spacing: -0.5px;
+    }
+
+    .stat-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      color: var(--text-muted);
+    }
+
+    /* Views */
+    .view-content { display: none; }
+    .view-content.active { display: block; animation: fadeIn 0.25s ease; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* MCP Server Grid */
+    .servers-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .server-card {
+      background: #FFFFFF;
+      border: 1px solid var(--border);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+      border-radius: 16px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: all 0.25s ease;
+    }
+
+    .server-card:hover {
+      border-color: #94A3B8;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+    }
+
+    .server-header {
+      padding: 1.25rem 1.5rem;
+      background: #F8FAFC;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .server-title-group {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .server-icon {
+      font-size: 1.8rem;
+    }
+
+    .server-name {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: #0F172A;
+      letter-spacing: -0.3px;
+    }
+
+    .server-meta {
+      font-size: 0.8rem;
+      font-family: var(--mono);
+      color: var(--text-muted);
+      margin-top: 0.25rem;
+    }
+
+    .status-pill {
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 0.25rem 0.65rem;
+      border-radius: 9999px;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: #ECFDF5;
+      color: var(--success);
+      border: 1px solid #A7F3D0;
+    }
+
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--success);
+      box-shadow: 0 0 6px var(--success);
+    }
+
+    /* Circuit Breaker Status Badges */
+    .circuit-badge {
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 0.28rem 0.7rem;
+      border-radius: 9999px;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      letter-spacing: -0.2px;
+      transition: all 0.25s ease;
+    }
+
+    .circuit-badge-closed {
+      background: #ECFDF5;
+      color: #059669;
+      border: 1px solid #A7F3D0;
+    }
+
+    .circuit-badge-open {
+      background: #FEF2F2;
+      color: #DC2626;
+      border: 1px solid #FECACA;
+      animation: pulse-open 1.8s infinite;
+    }
+
+    .circuit-badge-half_open {
+      background: #FFFBEB;
+      color: #D97706;
+      border: 1px solid #FDE68A;
+    }
+
+    @keyframes pulse-open {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.4); }
+      50% { box-shadow: 0 0 0 6px rgba(220, 38, 38, 0); }
+    }
+
+    .circuit-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+    }
+    .circuit-dot-closed { background: #059669; box-shadow: 0 0 6px #059669; }
+    .circuit-dot-open { background: #DC2626; box-shadow: 0 0 6px #DC2626; }
+    .circuit-dot-half_open { background: #D97706; box-shadow: 0 0 6px #D97706; }
+
+    .circuit-metric-strip {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.55rem 0.85rem;
+      background: #F8FAFC;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 0.76rem;
+      color: var(--text-muted);
+    }
+    .circuit-metric-strip strong {
+      color: var(--text);
+    }
+    .circuit-actions-row {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+    .btn-circuit-action {
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 0.25rem 0.55rem;
+      border-radius: 6px;
+      cursor: pointer;
+      border: 1px solid var(--border);
+      background: #FFFFFF;
+      transition: all 0.2s;
+    }
+    .btn-circuit-trip {
+      color: #DC2626;
+    }
+    .btn-circuit-trip:hover {
+      background: #DC2626;
+      color: #FFFFFF;
+      border-color: #DC2626;
+    }
+    .btn-circuit-reset {
+      color: #059669;
+    }
+    .btn-circuit-reset:hover {
+      background: #059669;
+      color: #FFFFFF;
+      border-color: #059669;
+    }
+
+    .server-body {
+      padding: 1.25rem 1.5rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .cmd-box {
+      background: #F1F5F9;
+      border: 1px solid var(--border);
+      padding: 0.65rem 0.85rem;
+      border-radius: 8px;
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      color: #0369A1;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      word-break: break-all;
+    }
+
+    .server-tools-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+    }
+
+    .tools-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .tool-item {
+      background: #F8FAFC;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 0.75rem 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.2s;
+    }
+
+    .tool-item:hover {
+      background: #F1F5F9;
+      border-color: #CBD5E1;
+    }
+
+    .tool-info h4 {
+      font-size: 0.88rem;
+      font-family: var(--mono);
+      font-weight: 600;
+      color: #0F172A;
+    }
+
+    .tool-info p {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-top: 0.2rem;
+    }
+
+    .tool-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .risk-tag {
+      font-size: 0.68rem;
+      font-weight: 700;
+      padding: 0.15rem 0.45rem;
+      border-radius: 4px;
+      text-transform: uppercase;
+    }
+    .risk-low { background: #ECFDF5; color: #059669; border: 1px solid #A7F3D0; }
+    .risk-medium { background: #FFFBEB; color: #D97706; border: 1px solid #FDE68A; }
+    .risk-high { background: #FEF2F2; color: #DC2626; border: 1px solid #FECACA; }
+
+    .btn-try {
+      background: #E0F2FE;
+      border: 1px solid #BAE6FD;
+      color: #0284C7;
+      padding: 0.35rem 0.75rem;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-try:hover {
+      background: #0284C7;
+      color: #FFF;
+    }
+
+    .server-footer {
+      padding: 1rem 1.5rem;
+      background: #F8FAFC;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .btn-ping {
+      background: #FFFFFF;
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 0.45rem 0.95rem;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+      transition: all 0.2s;
+    }
+
+    .btn-ping:hover {
+      background: #F1F5F9;
+      border-color: #94A3B8;
+    }
+
+    .ping-result {
+      font-size: 0.8rem;
+      font-family: var(--mono);
+      color: var(--text-muted);
+    }
+
+    /* Playground */
+    .playground-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    @media (max-width: 900px) {
+      .playground-container { grid-template-columns: 1fr; }
+      .servers-grid { grid-template-columns: 1fr; }
+    }
+
+    .panel {
+      background: #FFFFFF;
+      border: 1px solid var(--border);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+      border-radius: 16px;
+      padding: 1.75rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .panel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.85rem;
+    }
+
+    .panel-title {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: #0F172A;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .form-label {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--text-muted);
+    }
+
+    .form-select, .form-input, .form-textarea {
+      background: #F8FAFC;
+      border: 1px solid var(--border);
+      color: #0F172A;
+      padding: 0.75rem 1rem;
+      border-radius: 10px;
+      font-family: var(--font);
+      font-size: 0.9rem;
+      outline: none;
+      transition: all 0.2s;
+    }
+
+    .form-textarea {
+      font-family: var(--mono);
+      font-size: 0.85rem;
+      resize: vertical;
+      min-height: 180px;
+    }
+
+    .form-select:focus, .form-input:focus, .form-textarea:focus {
+      border-color: #000;
+      background: #FFF;
+      box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.06);
+    }
+
+    .quick-presets {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .btn-preset {
+      background: #F1F5F9;
+      border: 1px solid var(--border);
+      color: #334155;
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 0.35rem 0.65rem;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-preset:hover {
+      background: #000;
+      color: #FFF;
+      border-color: #000;
+    }
+
+    .btn-execute {
+      background: #000000;
+      border: none;
+      color: #FFF;
+      font-size: 0.95rem;
+      font-weight: 700;
+      padding: 0.85rem;
+      border-radius: 10px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+      transition: all 0.2s;
+    }
+
+    .btn-execute:hover {
+      background: #333333;
+      transform: translateY(-1px);
+    }
+
+    .btn-execute:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .console-box {
+      flex: 1;
+      background: #0F172A;
+      border: 1px solid #1E293B;
+      border-radius: 10px;
+      padding: 1.15rem;
+      font-family: var(--mono);
+      font-size: 0.85rem;
+      color: #F8FAFC;
+      overflow-y: auto;
+      max-height: 480px;
+      white-space: pre-wrap;
+      word-break: break-all;
+    }
+
+    /* ==========================================================================
+       HITL Approvals Hub & Inspection Modal Styles
+       ========================================================================== */
+    .approval-stats-ribbon {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .approval-stat-tile {
+      background: #F8FAFC;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1rem 1.25rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .approval-stat-tile:hover {
+      border-color: #CBD5E1;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+    }
+
+    .approval-stat-num {
+      font-size: 1.6rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+
+    .approval-stat-title {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-top: 0.25rem;
+    }
+
+    .text-amber { color: #D97706; }
+    .text-emerald { color: #059669; }
+    .text-rose { color: #DC2626; }
+    .text-slate { color: #64748B; }
+    .text-blue { color: #0284C7; }
+
+    .approval-toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .approval-filter-pills {
+      display: flex;
+      gap: 0.4rem;
+      flex-wrap: wrap;
+    }
+
+    .filter-pill {
+      background: #F1F5F9;
+      border: 1px solid var(--border);
+      color: #475569;
+      padding: 0.35rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .filter-pill:hover {
+      background: #E2E8F0;
+      color: #0F172A;
+    }
+
+    .filter-pill.active {
+      background: #0F172A;
+      color: #FFFFFF;
+      border-color: #0F172A;
+    }
+
+    .approval-search-box input {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.45rem 0.85rem;
+      font-size: 0.82rem;
+      font-family: var(--font);
+      outline: none;
+      min-width: 260px;
+      transition: border-color 0.2s;
+    }
+
+    .approval-search-box input:focus {
+      border-color: var(--primary);
+    }
+
+    .approvals-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(440px, 1fr));
+      gap: 1.25rem;
+    }
+
+    @media (max-width: 900px) {
+      .approvals-cards-grid { grid-template-columns: 1fr; }
+    }
+
+    .approval-card {
+      background: #FFFFFF;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: all 0.2s ease;
+    }
+
+    .approval-card:hover {
+      border-color: #94A3B8;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+    }
+
+    .approval-card-header {
+      padding: 1rem 1.25rem;
+      background: #F8FAFC;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .approval-card-body {
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+      flex: 1;
+    }
+
+    .approval-card-footer {
+      padding: 0.85rem 1.25rem;
+      background: #F8FAFC;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    /* 7 Clear Status States */
+    .status-pill-badge {
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 0.25rem 0.65rem;
+      border-radius: 9999px;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+    .status-awaiting {
+      background: #FFFBEB;
+      color: #B45309;
+      border: 1px solid #FDE68A;
+    }
+    .status-approved {
+      background: #ECFDF5;
+      color: #059669;
+      border: 1px solid #A7F3D0;
+    }
+    .status-rejected {
+      background: #FEF2F2;
+      color: #DC2626;
+      border: 1px solid #FECACA;
+    }
+    .status-expired {
+      background: #F1F5F9;
+      color: #64748B;
+      border: 1px solid #CBD5E1;
+    }
+    .status-executing {
+      background: #E0F2FE;
+      color: #0284C7;
+      border: 1px solid #BAE6FD;
+    }
+    .status-completed {
+      background: #ECFDF5;
+      color: #059669;
+      border: 1px solid #A7F3D0;
+    }
+    .status-failed {
+      background: #FEF2F2;
+      color: #DC2626;
+      border: 1px solid #FECACA;
+    }
+
+    /* Risk Banners */
+    .risk-banner {
+      border-radius: 8px;
+      padding: 0.65rem 0.85rem;
+      font-size: 0.8rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+    .risk-banner-high, .risk-banner-critical {
+      background: #FEF2F2;
+      border: 1px solid #FECACA;
+      color: #991B1B;
+    }
+    .risk-banner-medium {
+      background: #FFFBEB;
+      border: 1px solid #FDE68A;
+      color: #92400E;
+    }
+    .risk-banner-low {
+      background: #ECFDF5;
+      border: 1px solid #A7F3D0;
+      color: #065F46;
+    }
+
+    .approval-cmd-box {
+      background: #0F172A;
+      border: 1px solid #1E293B;
+      border-radius: 8px;
+      padding: 0.65rem 0.85rem;
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      color: #38BDF8;
+      overflow-x: auto;
+      white-space: pre-wrap;
+      word-break: break-all;
+      position: relative;
+    }
+
+    .approval-meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+    .approval-meta-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    .scope-pill {
+      font-size: 0.7rem;
+      font-family: var(--mono);
+      background: #F1F5F9;
+      border: 1px solid #E2E8F0;
+      color: #334155;
+      padding: 0.15rem 0.45rem;
+      border-radius: 4px;
+    }
+
+    /* Interactive Buttons */
+    .btn-approve-action {
+      background: #059669;
+      color: #FFFFFF;
+      border: none;
+      padding: 0.45rem 0.85rem;
+      border-radius: 7px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      transition: all 0.15s;
+    }
+    .btn-approve-action:hover:not(:disabled) {
+      background: #047857;
+      transform: translateY(-1px);
+    }
+    .btn-approve-action:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .btn-reject-action {
+      background: #DC2626;
+      color: #FFFFFF;
+      border: none;
+      padding: 0.45rem 0.85rem;
+      border-radius: 7px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      transition: all 0.15s;
+    }
+    .btn-reject-action:hover:not(:disabled) {
+      background: #B91C1C;
+      transform: translateY(-1px);
+    }
+    .btn-reject-action:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .btn-inspect-action {
+      background: #FFFFFF;
+      border: 1px solid var(--border);
+      color: #0F172A;
+      padding: 0.45rem 0.75rem;
+      border-radius: 7px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .btn-inspect-action:hover {
+      background: #F1F5F9;
+      border-color: #94A3B8;
+    }
+
+    /* Approval Inspection Modal */
+    .approval-modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.45);
+      backdrop-filter: blur(4px);
+      z-index: 400;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+    }
+    .approval-modal-backdrop.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .approval-modal {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0.96);
+      width: 640px;
+      max-width: 94vw;
+      max-height: 88vh;
+      background: #FFFFFF;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.2);
+      z-index: 405;
+      display: flex;
+      flex-direction: column;
+      opacity: 0;
+      pointer-events: none;
+      transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease;
+      overflow: hidden;
+    }
+    .approval-modal.open {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    .approval-modal-header {
+      padding: 1.25rem 1.5rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #F8FAFC;
+    }
+
+    .approval-modal-body {
+      padding: 1.5rem;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .approval-modal-footer {
+      padding: 1rem 1.5rem;
+      border-top: 1px solid var(--border);
+      background: #F8FAFC;
+      display: flex;
+      justify-content: flex-end;
+      gap: 0.65rem;
+    }
+
+    .modal-detail-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding: 0.45rem 0;
+      border-bottom: 1px solid #F1F5F9;
+      font-size: 0.82rem;
+      gap: 1rem;
+    }
+    .modal-detail-label {
+      font-weight: 600;
+      color: #64748B;
+      flex-shrink: 0;
+    }
+    .modal-detail-val {
+      font-weight: 600;
+      color: #0F172A;
+      text-align: right;
+      word-break: break-all;
+    }
+
+    .modal-code-block {
+      background: #0F172A;
+      border: 1px solid #1E293B;
+      border-radius: 8px;
+      padding: 0.85rem 1rem;
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      color: #38BDF8;
+      overflow-x: auto;
+      max-height: 200px;
+      white-space: pre-wrap;
+      word-break: break-all;
+    }
+
+    .btn-copy-small {
+      background: #FFFFFF;
+      border: 1px solid var(--border);
+      color: #475569;
+      padding: 0.2rem 0.5rem;
+      border-radius: 5px;
+      font-size: 0.72rem;
+      cursor: pointer;
+      font-weight: 600;
+    }
+    .btn-copy-small:hover {
+      background: #F1F5F9;
+      color: #0F172A;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: var(--text-muted);
+      font-size: 0.82rem;
+      border-top: 1px solid var(--border);
+      margin-top: auto;
+      background: #FFFFFF;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="brand">
+      <div class="logo-bubbles">
+        <div class="logo-dot-1"></div>
+        <div class="logo-dot-2"></div>
+        <div class="logo-dot-3"></div>
+      </div>
+      <div class="brand-text">
+        <h1>winnie mcp hub</h1>
+      </div>
+      <span class="badge-mcp">MCP 2.x Standard</span>
+    </div>
+
+    <!-- Navigation Tabs -->
+    <div class="nav-tabs">
+      <button class="tab-btn active" onclick="switchTab('servers')">
+        <span>🌐</span> MCP Servers
+      </button>
+      <button class="tab-btn" onclick="switchTab('circuits')">
+        <span>🛡️</span> Live Circuit Breakers
+      </button>
+      <button class="tab-btn" onclick="switchTab('playground')">
+        <span>⚡</span> Tool Playground
+      </button>
+      <button class="tab-btn" onclick="switchTab('approvals')">
+        <span>⚖️</span> Approvals &amp; HITL <span class="badge-pending-count" id="nav-pending-badge" style="display:none; margin-left: 6px; background: #DC2626; color: #FFF; font-size: 0.68rem; font-weight: 700; padding: 1px 6px; border-radius: 9999px;">0</span>
+      </button>
+    </div>
+
+    <div class="header-actions">
+      <a href="/?open=true" class="header-link header-link-primary">
+        <span>🤖</span> Open Winnie Chatbot
+      </a>
+      <a href="/docs" target="_blank" class="header-link">
+        <span>📖</span> Swagger Docs
+      </a>
+      <a href="http://localhost:3000" target="_blank" class="header-link">
+        <span>📊</span> Langfuse
+      </a>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main>
+
+    <!-- Hero Stats -->
+    <section class="hero-banner">
+      <div class="stat-card">
+        <div class="stat-icon" style="color: #0284C7;">🖥️</div>
+        <div>
+          <div class="stat-value" id="stat-servers-count">4</div>
+          <div class="stat-label">MCP Servers</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon" style="color: #059669;">⚡</div>
+        <div>
+          <div class="stat-value">stdio</div>
+          <div class="stat-label">Transport Protocol</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon" style="color: #7C3AED;">🛠️</div>
+        <div>
+          <div class="stat-value" id="stat-tools-count">10</div>
+          <div class="stat-label">Registered Tools</div>
+        </div>
+      </div>
+      <div class="stat-card" style="cursor: pointer;" onclick="switchTab('circuits')">
+        <div class="stat-icon" style="color: #059669;">🛡️</div>
+        <div>
+          <div class="stat-value" id="stat-circuits-state">4 / 4 CLOSED</div>
+          <div class="stat-label">Live Circuit Breakers</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon" style="color: #6366F1;">🧠</div>
+        <div>
+          <div class="stat-value" id="stat-tpm-pool">32,000 TPM</div>
+          <div class="stat-label" id="stat-deployments-count">LiteLLM Token Pool (3)</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEW 1: MCP Servers Grid -->
+    <section id="view-servers" class="view-content active">
+      <div class="servers-grid" id="servers-container">
+        <div style="color: var(--text-muted); font-size: 0.9rem; padding: 2rem;">Loading registered MCP servers...</div>
+      </div>
+    </section>
+
+    <!-- VIEW 2: Live Circuit Breakers -->
+    <section id="view-circuits" class="view-content">
+      <div style="background: #FFFFFF; border: 1px solid var(--border); border-radius: 16px; padding: 1.5rem; box-shadow: 0 2px 10px rgba(0,0,0,0.03);">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; border-bottom: 1px solid var(--border); padding-bottom: 1rem; flex-wrap: wrap; gap: 1rem;">
+          <div>
+            <h2 style="font-size: 1.25rem; font-weight: 800; color: #0F172A; display: flex; align-items: center; gap: 0.6rem;">
+              <span>🛡️</span> Live Tool Circuit Breakers (3-State Distributed Registry)
+            </h2>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.3rem;">
+              Real-time state machine: <strong style="color:#059669;">CLOSED [Green/Healthy]</strong>, <strong style="color:#DC2626;">OPEN [Red/Tripped]</strong>, <strong style="color:#D97706;">HALF_OPEN [Yellow/Probing]</strong> with &lt;1ms fail-fast protection.
+            </p>
+          </div>
+          <div style="display: flex; gap: 0.5rem;">
+            <button class="btn-preset" onclick="loadServers()" style="padding: 0.5rem 0.9rem; font-size: 0.8rem; display: flex; align-items: center; gap: 0.4rem;">
+              <span>🔄</span> Refresh Telemetry
+            </button>
+          </div>
+        </div>
+        <div id="circuits-summary-container">
+          <div style="color: var(--text-muted); padding: 1.5rem;">Loading circuit telemetry...</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEW 2: Tool Playground -->
+    <section id="view-playground" class="view-content">
+      <div class="playground-container">
+        <!-- Input Panel -->
+        <div class="panel">
+          <div class="panel-header">
+            <div class="panel-title">
+              <span>⚡</span> MCP Tool Invocation
+            </div>
+            <span class="badge-mcp" id="selected-tool-transport">stdio</span>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Select Tool</label>
+            <select id="tool-select" class="form-select" onchange="onToolChange()">
+              <!-- Options populated by JS -->
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Description</label>
+            <p id="tool-description" style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.5;">
+              Select a tool to view parameters and description.
+            </p>
+          </div>
+
+          <div class="form-group">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <label class="form-label">Arguments (JSON)</label>
+              <div class="quick-presets" id="presets-container">
+                <!-- Preset buttons populated by JS -->
+              </div>
+            </div>
+            <textarea id="tool-arguments" class="form-textarea" spellcheck="false">{}</textarea>
+          </div>
+
+          <button id="btn-run-tool" class="btn-execute" onclick="executeSelectedTool()">
+            <span>▶</span> Execute Tool via Real MCP
+          </button>
+        </div>
+
+        <!-- Output Panel -->
+        <div class="panel">
+          <div class="panel-header">
+            <div class="panel-title">
+              <span>🖥️</span> Execution Result
+            </div>
+            <div id="execution-meta" style="font-size: 0.8rem; font-family: var(--mono); color: var(--text-muted);">
+              Ready
+            </div>
+          </div>
+
+          <div id="output-console" class="console-box">Click "Execute Tool via Real MCP" to dispatch a JSON-RPC request to the server process over standard I/O pipes.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEW 4: Approvals & HITL Management -->
+    <section id="view-approvals" class="view-content">
+      <div style="background: #FFFFFF; border: 1px solid var(--border); border-radius: 16px; padding: 1.75rem; box-shadow: 0 2px 10px rgba(0,0,0,0.03);">
+        
+        <!-- Header -->
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1.5rem; border-bottom: 1px solid var(--border); padding-bottom: 1.25rem; flex-wrap: wrap; gap: 1rem;">
+          <div>
+            <h2 style="font-size: 1.35rem; font-weight: 800; color: #0F172A; display: flex; align-items: center; gap: 0.65rem;">
+              <span>⚖️</span> Human-in-the-Loop (HITL) Approvals
+            </h2>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.35rem;">
+              Review, inspect, authorize, or reject operations with multi-tenant governance, cryptographic proof, and real-time execution status.
+            </p>
+          </div>
+          <div style="display: flex; gap: 0.65rem; align-items: center;">
+            <button class="btn-ping" onclick="loadApprovals()" style="padding: 0.5rem 0.95rem; font-size: 0.82rem; display: flex; align-items: center; gap: 0.4rem;">
+              <span>🔄</span> Refresh Telemetry
+            </button>
+          </div>
+        </div>
+
+        <!-- Stats Ribbon -->
+        <div class="approval-stats-ribbon">
+          <div class="approval-stat-tile" onclick="setApprovalFilter('pending')">
+            <div class="approval-stat-num text-amber" id="stat-approvals-pending">0</div>
+            <div class="approval-stat-title">Awaiting Approval</div>
+          </div>
+          <div class="approval-stat-tile" onclick="setApprovalFilter('approved')">
+            <div class="approval-stat-num text-emerald" id="stat-approvals-approved">0</div>
+            <div class="approval-stat-title">Approved</div>
+          </div>
+          <div class="approval-stat-tile" onclick="setApprovalFilter('executed')">
+            <div class="approval-stat-num text-emerald" id="stat-approvals-executed">0</div>
+            <div class="approval-stat-title">Executed / Completed</div>
+          </div>
+          <div class="approval-stat-tile" onclick="setApprovalFilter('rejected')">
+            <div class="approval-stat-num text-rose" id="stat-approvals-rejected">0</div>
+            <div class="approval-stat-title">Rejected</div>
+          </div>
+          <div class="approval-stat-tile" onclick="setApprovalFilter('expired')">
+            <div class="approval-stat-num text-slate" id="stat-approvals-expired">0</div>
+            <div class="approval-stat-title">Expired</div>
+          </div>
+        </div>
+
+        <!-- Filter / Search Toolbar -->
+        <div class="approval-toolbar">
+          <div class="approval-filter-pills" id="approval-filter-pills">
+            <button class="filter-pill active" onclick="setApprovalFilter('all')">All</button>
+            <button class="filter-pill" onclick="setApprovalFilter('pending')">Awaiting approval</button>
+            <button class="filter-pill" onclick="setApprovalFilter('approved')">Approved</button>
+            <button class="filter-pill" onclick="setApprovalFilter('rejected')">Rejected</button>
+            <button class="filter-pill" onclick="setApprovalFilter('expired')">Expired</button>
+            <button class="filter-pill" onclick="setApprovalFilter('executing')">Executing</button>
+            <button class="filter-pill" onclick="setApprovalFilter('executed')">Completed</button>
+            <button class="filter-pill" onclick="setApprovalFilter('failed')">Failed</button>
+          </div>
+          <div class="approval-search-box">
+            <input type="text" id="approval-search-input" placeholder="Search operation, tool, command, tenant..." oninput="filterApprovals()">
+          </div>
+        </div>
+
+        <!-- Cards Container -->
+        <div id="approvals-cards-container" class="approvals-cards-grid">
+          <div style="color: var(--text-muted); padding: 2rem; text-align: center;">Loading approvals...</div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    winnie agent platform • Model Context Protocol 2.x • Powered by FastAPI &amp; LangGraph
+  </footer>
+
+  <!-- HITL Approval Inspection Modal -->
+  <div class="approval-modal-backdrop" id="approval-modal-backdrop" onclick="closeApprovalModal()"></div>
+  <div class="approval-modal" id="approval-modal">
+    <div class="approval-modal-header">
+      <div style="display: flex; align-items: center; gap: 0.65rem;">
+        <span style="font-size: 1.3rem;">🛡️</span>
+        <div>
+          <h3 id="modal-approval-title" style="font-size: 1.15rem; font-weight: 800; color: #0F172A;">Approval Details</h3>
+          <div id="modal-approval-id" style="font-family: var(--mono); font-size: 0.72rem; color: #64748B;">ID: -</div>
+        </div>
+      </div>
+      <button class="btn-modal-close" style="width: 32px; height: 32px; border-radius: 50%; border: none; background: transparent; cursor: pointer; font-size: 1.3rem; display: flex; align-items: center; justify-content: center; color: #64748B;" onclick="closeApprovalModal()">×</button>
+    </div>
+    <div class="approval-modal-body">
+      <!-- Status & Risk Banner -->
+      <div id="modal-risk-banner" class="risk-banner risk-banner-high">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <span id="modal-risk-level-tag" class="risk-tag risk-high">HIGH RISK</span>
+          <span id="modal-status-pill" class="status-pill-badge status-awaiting">🟡 Awaiting approval</span>
+        </div>
+        <p id="modal-risk-explanation" style="font-size: 0.82rem; margin-top: 0.45rem; line-height: 1.4;"></p>
+      </div>
+
+      <!-- Field Details Grid -->
+      <div class="modal-detail-row">
+        <span class="modal-detail-label">Requested Operation</span>
+        <span class="modal-detail-val" id="modal-operation-val">-</span>
+      </div>
+
+      <div class="modal-detail-row">
+        <span class="modal-detail-label">Working Directory</span>
+        <span class="modal-detail-val" id="modal-workdir-val" style="font-family: var(--mono);">-</span>
+      </div>
+
+      <div class="modal-detail-row">
+        <span class="modal-detail-label">Affected Files / Scope</span>
+        <div class="modal-detail-val" id="modal-files-val">-</div>
+      </div>
+
+      <div class="modal-detail-row">
+        <span class="modal-detail-label">Tenant ID &bull; User ID</span>
+        <span class="modal-detail-val" id="modal-tenant-user-val">-</span>
+      </div>
+
+      <div class="modal-detail-row">
+        <span class="modal-detail-label">Created At &bull; Expiration</span>
+        <span class="modal-detail-val" id="modal-timestamps-val">-</span>
+      </div>
+
+      <!-- Exact Command Block -->
+      <div style="margin-top: 0.75rem;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
+          <label style="font-size: 0.76rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: #64748B;">Exact Command</label>
+          <button class="btn-copy-small" onclick="copyModalCommand()">📋 Copy</button>
+        </div>
+        <pre class="modal-code-block" id="modal-exact-command"><code></code></pre>
+      </div>
+
+      <!-- Arguments Block -->
+      <div style="margin-top: 0.75rem;">
+        <label style="font-size: 0.76rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: #64748B; margin-bottom: 0.35rem; display: block;">Structured Arguments</label>
+        <pre class="modal-code-block" id="modal-arguments-json"><code></code></pre>
+      </div>
+    </div>
+    <div class="approval-modal-footer" id="modal-action-footer">
+      <button class="btn-approve-action" id="btn-modal-approve" onclick="handleModalAction(true)">✔ Approve &amp; Execute</button>
+      <button class="btn-reject-action" id="btn-modal-reject" onclick="handleModalAction(false)">✖ Reject Operation</button>
+    </div>
+  </div>
+
+  <script>
+    let serversData = [];
+
+    function switchTab(tabName) {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.view-content').forEach(v => v.classList.remove('active'));
+
+      if (tabName === 'servers') {
+        document.querySelectorAll('.tab-btn')[0].classList.add('active');
+        document.getElementById('view-servers').classList.add('active');
+      } else if (tabName === 'circuits') {
+        document.querySelectorAll('.tab-btn')[1].classList.add('active');
+        document.getElementById('view-circuits').classList.add('active');
+        renderCircuits();
+      } else if (tabName === 'playground') {
+        document.querySelectorAll('.tab-btn')[2].classList.add('active');
+        document.getElementById('view-playground').classList.add('active');
+      } else if (tabName === 'approvals') {
+        document.querySelectorAll('.tab-btn')[3].classList.add('active');
+        document.getElementById('view-approvals').classList.add('active');
+        loadApprovals();
+      }
+    }
+
+    function getServerIcon(name) {
+      switch(name) {
+        case 'filesystem': return '📁';
+        case 'github': return '🐙';
+        case 'terminal': return '💻';
+        case 'web_scraper': return '🌐';
+        default: return '⚙️';
+      }
+    }
+
+    async function loadRouterStatus() {
+      try {
+        const resp = await fetch('/api/router/status');
+        if (resp.ok) {
+          const data = await resp.json();
+          document.getElementById('stat-tpm-pool').innerText = `${Number(data.aggregate_tpm_capacity).toLocaleString()} TPM`;
+          document.getElementById('stat-deployments-count').innerText = `LiteLLM Pool (${data.total_deployments} Models)`;
+        }
+      } catch (e) {
+        console.warn('Could not load router status', e);
+      }
+    }
+
+    async function loadServers() {
+      loadRouterStatus();
+      try {
+        const resp = await fetch('/api/mcp/servers');
+        const data = await resp.json();
+        serversData = data.servers || [];
+        renderServers();
+        renderCircuits();
+        populateToolSelector();
+      } catch (err) {
+        console.error('Failed to load MCP servers', err);
+        document.getElementById('servers-container').innerHTML = 
+          `<div style="color: var(--danger); padding: 2rem;">Error connecting to FastAPI backend: ${err.message}</div>`;
+      }
+    }
+
+    function renderServers() {
+      const container = document.getElementById('servers-container');
+      if (!serversData.length) {
+        container.innerHTML = '<div style="color: var(--text-muted); padding: 2rem;">No MCP servers registered.</div>';
+        return;
+      }
+
+      let totalTools = 0;
+      let closedCount = 0;
+      let html = '';
+
+      serversData.forEach(server => {
+        totalTools += (server.tools || []).length;
+        const icon = getServerIcon(server.name);
+        const cmdDisplay = server.command === 'python' ? `python -m src.mcp_servers.${server.name}_server` : `${server.command} ${(server.args || []).join(' ')}`;
+        
+        const cb = server.circuit_breaker || {
+          state: 'CLOSED',
+          failure_count: 0,
+          failure_threshold: 3,
+          cooldown_remaining_seconds: 0,
+          total_calls: 0,
+          total_trips: 0
+        };
+        const stateKey = (cb.state || 'CLOSED').toLowerCase();
+        if (cb.state === 'CLOSED') closedCount++;
+
+        const stateLabel = cb.state === 'CLOSED'
+          ? 'CLOSED [Healthy]'
+          : cb.state === 'OPEN'
+          ? 'OPEN [Tripped]'
+          : 'HALF_OPEN [Probing]';
+
+        html += `
+          <div class="server-card">
+            <div class="server-header">
+              <div class="server-title-group">
+                <div class="server-icon">${icon}</div>
+                <div>
+                  <div class="server-name">${server.name.toUpperCase()}</div>
+                  <div class="server-meta">Transport: <strong>${server.transport}</strong> • Risk: ${server.risk_level}</div>
+                </div>
+              </div>
+              <span class="circuit-badge circuit-badge-${stateKey}" id="badge-${server.name}">
+                <span class="circuit-dot circuit-dot-${stateKey}"></span> ${stateLabel}
+              </span>
+            </div>
+
+            <div class="server-body">
+              <div class="cmd-box">
+                <span>$ ${cmdDisplay}</span>
+              </div>
+
+              <!-- Live Circuit Breaker Metrics Strip -->
+              <div class="circuit-metric-strip">
+                <div>
+                  Failures: <strong>${cb.failure_count}/${cb.failure_threshold}</strong> &bull; Calls: <strong>${cb.total_calls || 0}</strong> &bull; Trips: <strong>${cb.total_trips || 0}</strong>
+                </div>
+                <div class="circuit-actions-row">
+                  <button class="btn-circuit-action btn-circuit-trip" onclick="tripCircuit('${server.name}')" title="Simulate failure: Trip circuit to OPEN">⚡ Trip</button>
+                  <button class="btn-circuit-action btn-circuit-reset" onclick="resetCircuit('${server.name}')" title="Reset circuit to CLOSED healthy">🔄 Reset</button>
+                </div>
+              </div>
+
+              ${cb.state === 'OPEN' ? `
+                <div style="background: #FEF2F2; border: 1px solid #FECACA; border-radius: 8px; padding: 0.55rem 0.85rem; font-size: 0.75rem; color: #DC2626;">
+                  ⚠️ <strong>CIRCUIT TRIPPED (Fast-Failing &lt;1ms):</strong> Cooldown remaining: <strong>${cb.cooldown_remaining_seconds || 0}s</strong>.<br>
+                  <em>${cb.last_failure_reason || 'Tripped by operator/circuit-breaker'}</em>
+                </div>
+              ` : ''}
+
+              <div class="server-tools-label">Available Tools (${(server.tools || []).length})</div>
+              <div class="tools-list">
+                ${(server.tools || []).map(tool => `
+                  <div class="tool-item">
+                    <div class="tool-info">
+                      <h4>${tool.name}</h4>
+                      <p>${tool.description || 'No description provided'}</p>
+                    </div>
+                    <div class="tool-actions">
+                      <span class="risk-tag risk-${server.risk_level}">${server.risk_level}</span>
+                      <button class="btn-try" onclick="selectAndSwitchToTool('${tool.name}')">Test</button>
+                    </div>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+
+            <div class="server-footer">
+              <button class="btn-ping" id="btn-ping-${server.name}" onclick="pingServer('${server.name}')">
+                <span>⚡</span> Ping Handshake
+              </button>
+              <div class="ping-result" id="ping-res-${server.name}">Protocol: MCP 2.x</div>
+            </div>
+          </div>
+        `;
+      });
+
+      container.innerHTML = html;
+      document.getElementById('stat-servers-count').innerText = serversData.length;
+      document.getElementById('stat-tools-count').innerText = totalTools;
+      const statCircuits = document.getElementById('stat-circuits-state');
+      if (statCircuits) {
+        statCircuits.innerText = `${closedCount} / ${serversData.length} CLOSED`;
+        statCircuits.style.color = closedCount === serversData.length ? '#059669' : '#DC2626';
+      }
+    }
+
+    function renderCircuits() {
+      const container = document.getElementById('circuits-summary-container');
+      if (!container) return;
+
+      if (!serversData.length) {
+        container.innerHTML = '<div style="color: var(--text-muted); padding: 1rem;">No servers loaded.</div>';
+        return;
+      }
+
+      let html = `
+        <div style="overflow-x: auto;">
+          <table style="width: 100%; border-collapse: collapse; font-size: 0.85rem; text-align: left;">
+            <thead>
+              <tr style="border-bottom: 2px solid var(--border); background: #F8FAFC; color: var(--text-muted);">
+                <th style="padding: 0.75rem 1rem;">Tool Server</th>
+                <th style="padding: 0.75rem 1rem;">Transport</th>
+                <th style="padding: 0.75rem 1rem;">Circuit State</th>
+                <th style="padding: 0.75rem 1rem;">Failures / Threshold</th>
+                <th style="padding: 0.75rem 1rem;">Cooldown Remaining</th>
+                <th style="padding: 0.75rem 1rem;">Lifetime Calls & Trips</th>
+                <th style="padding: 0.75rem 1rem;">Last Error / Reason</th>
+                <th style="padding: 0.75rem 1rem;">Manual Controls</th>
+              </tr>
+            </thead>
+            <tbody>
+      `;
+
+      serversData.forEach(server => {
+        const cb = server.circuit_breaker || {
+          state: 'CLOSED',
+          failure_count: 0,
+          failure_threshold: 3,
+          cooldown_remaining_seconds: 0,
+          total_calls: 0,
+          total_trips: 0,
+          last_failure_reason: ''
+        };
+        const stateKey = (cb.state || 'CLOSED').toLowerCase();
+        const stateBadge = `
+          <span class="circuit-badge circuit-badge-${stateKey}">
+            <span class="circuit-dot circuit-dot-${stateKey}"></span> ${cb.state}
+          </span>
+        `;
+
+        html += `
+          <tr style="border-bottom: 1px solid var(--border); transition: background 0.2s;" onmouseover="this.style.background='#F8FAFC'" onmouseout="this.style.background='transparent'">
+            <td style="padding: 0.85rem 1rem; font-weight: 700; color: #0F172A;">
+              ${getServerIcon(server.name)} ${server.name}
+            </td>
+            <td style="padding: 0.85rem 1rem; font-family: var(--mono); font-size: 0.8rem;">
+              ${server.transport}
+            </td>
+            <td style="padding: 0.85rem 1rem;">
+              ${stateBadge}
+            </td>
+            <td style="padding: 0.85rem 1rem; font-family: var(--mono);">
+              ${cb.failure_count} / ${cb.failure_threshold}
+            </td>
+            <td style="padding: 0.85rem 1rem; font-family: var(--mono);">
+              ${cb.state === 'OPEN' ? `<span style="color: #DC2626; font-weight: 600;">${cb.cooldown_remaining_seconds}s</span>` : '0.0s'}
+            </td>
+            <td style="padding: 0.85rem 1rem; font-size: 0.8rem; color: var(--text-muted);">
+              ${cb.total_calls || 0} calls / ${cb.total_trips || 0} trips
+            </td>
+            <td style="padding: 0.85rem 1rem; font-size: 0.75rem; color: var(--text-muted); max-width: 220px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+              ${cb.last_failure_reason || '—'}
+            </td>
+            <td style="padding: 0.85rem 1rem;">
+              <div style="display: flex; gap: 0.4rem;">
+                <button class="btn-circuit-action btn-circuit-trip" onclick="tripCircuit('${server.name}')">⚡ Trip</button>
+                <button class="btn-circuit-action btn-circuit-reset" onclick="resetCircuit('${server.name}')">🔄 Reset</button>
+              </div>
+            </td>
+          </tr>
+        `;
+      });
+
+      html += `
+            </tbody>
+          </table>
+        </div>
+      `;
+      container.innerHTML = html;
+    }
+
+    async function tripCircuit(serverName) {
+      try {
+        const resp = await fetch(`/api/tools/circuits/${serverName}/trip`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ reason: 'Operator manual test trip from MCP Hub' })
+        });
+        if (resp.ok) {
+          await loadServers();
+        } else {
+          const err = await resp.json();
+          alert('Failed to trip circuit: ' + JSON.stringify(err));
+        }
+      } catch (err) {
+        alert('Network error tripping circuit: ' + err.message);
+      }
+    }
+
+    async function resetCircuit(serverName) {
+      try {
+        const resp = await fetch(`/api/tools/circuits/${serverName}/reset`, { method: 'POST' });
+        if (resp.ok) {
+          await loadServers();
+        } else {
+          const err = await resp.json();
+          alert('Failed to reset circuit: ' + JSON.stringify(err));
+        }
+      } catch (err) {
+        alert('Network error resetting circuit: ' + err.message);
+      }
+    }
+
+    // Auto-refresh circuit telemetry every 4 seconds
+    setInterval(loadServers, 4000);
+
+    async function pingServer(serverName) {
+      const btn = document.getElementById(`btn-ping-${serverName}`);
+      const resSpan = document.getElementById(`ping-res-${serverName}`);
+      btn.disabled = true;
+      resSpan.innerText = 'Initializing handshake...';
+
+      try {
+        const resp = await fetch(`/api/mcp/ping/${serverName}`);
+        const data = await resp.json();
+        if (resp.ok) {
+          resSpan.innerHTML = `<span style="color: var(--success); font-weight: 600;">✔ Handshake OK (${data.latency_ms} ms)</span>`;
+        } else {
+          resSpan.innerHTML = `<span style="color: var(--danger); font-weight: 600;">✘ Error: ${data.detail || 'Failed'}</span>`;
+        }
+      } catch (err) {
+        resSpan.innerHTML = `<span style="color: var(--danger); font-weight: 600;">✘ Error: ${err.message}</span>`;
+      } finally {
+        btn.disabled = false;
+      }
+    }
+
+    const TOOL_PRESETS = {
+      'filesystem.list_directory': { path: '.' },
+      'filesystem.read_file': { path: 'real_mcp_verified.txt' },
+      'filesystem.write_file': { path: 'winnie_test.txt', content: 'Created from Winnie MCP Dashboard!' },
+      'github.get_repository': { owner: 'octocat', repo: 'Hello-World' },
+      'github.search_repositories': { query: 'language:python topic:agent', limit: 3 },
+      'terminal.run': { command: 'echo Real MCP Process Invocation from Winnie UI' },
+      'web_scraper.search': { query: 'Model Context Protocol', max_results: 3 },
+      'web_scraper.read_url': { url: 'https://example.com' }
+    };
+
+    function populateToolSelector() {
+      const select = document.getElementById('tool-select');
+      select.innerHTML = '';
+
+      serversData.forEach(server => {
+        const group = document.createElement('optgroup');
+        group.label = `${server.name.toUpperCase()} (${server.transport})`;
+
+        (server.tools || []).forEach(tool => {
+          const opt = document.createElement('option');
+          opt.value = tool.name;
+          opt.text = tool.name;
+          group.appendChild(opt);
+        });
+
+        select.appendChild(group);
+      });
+
+      onToolChange();
+    }
+
+    function onToolChange() {
+      const select = document.getElementById('tool-select');
+      const toolName = select.value;
+      if (!toolName) return;
+
+      let foundTool = null;
+      let foundServer = null;
+      for (const server of serversData) {
+        for (const tool of (server.tools || [])) {
+          if (tool.name === toolName) {
+            foundTool = tool;
+            foundServer = server;
+            break;
+          }
+        }
+      }
+
+      if (foundTool) {
+        document.getElementById('tool-description').innerText = foundTool.description || 'No description.';
+        document.getElementById('selected-tool-transport').innerText = `${foundServer.transport.toUpperCase()} • ${foundServer.name}`;
+
+        if (TOOL_PRESETS[toolName]) {
+          document.getElementById('tool-arguments').value = JSON.stringify(TOOL_PRESETS[toolName], null, 2);
+        } else {
+          const params = foundTool.parameters || {};
+          const sample = {};
+          if (params.properties) {
+            Object.keys(params.properties).forEach(k => {
+              sample[k] = params.properties[k].default !== undefined ? params.properties[k].default : "";
+            });
+          }
+          document.getElementById('tool-arguments').value = JSON.stringify(sample, null, 2);
+        }
+      }
+    }
+
+    function selectAndSwitchToTool(toolName) {
+      switchTab('playground');
+      const select = document.getElementById('tool-select');
+      select.value = toolName;
+      onToolChange();
+    }
+
+    async function executeSelectedTool() {
+      const toolName = document.getElementById('tool-select').value;
+      const rawArgs = document.getElementById('tool-arguments').value;
+      const btn = document.getElementById('btn-run-tool');
+      const consoleBox = document.getElementById('output-console');
+      const meta = document.getElementById('execution-meta');
+
+      let parsedArgs = {};
+      try {
+        parsedArgs = JSON.parse(rawArgs);
+      } catch (e) {
+        alert('Invalid JSON in arguments: ' + e.message);
+        return;
+      }
+
+      btn.disabled = true;
+      btn.innerHTML = '<span>⏳</span> Calling MCP Subprocess...';
+      meta.innerText = 'Executing...';
+      consoleBox.innerText = `[JSON-RPC 2.0] Dispatching tools/call for "${toolName}"...\nArguments: ${JSON.stringify(parsedArgs, null, 2)}`;
+
+      const startTime = performance.now();
+      try {
+        const resp = await fetch('/api/mcp/execute', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ tool: toolName, arguments: parsedArgs })
+        });
+        const duration = Math.round(performance.now() - startTime);
+        const data = await resp.json();
+
+        if (resp.ok) {
+          meta.innerHTML = `<span style="color: #059669; font-weight: 600;">✔ Completed in ${data.duration_ms || duration} ms</span>`;
+          consoleBox.innerText = typeof data.result === 'object' 
+            ? JSON.stringify(data.result, null, 2)
+            : String(data.result);
+        } else {
+          meta.innerHTML = `<span style="color: #DC2626; font-weight: 600;">✘ Error (${duration} ms)</span>`;
+          consoleBox.innerText = `Error: ${data.detail || JSON.stringify(data)}`;
+        }
+      } catch (err) {
+        meta.innerHTML = `<span style="color: #DC2626; font-weight: 600;">✘ Network Error</span>`;
+        consoleBox.innerText = `Execution failed: ${err.message}`;
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = '<span>▶</span> Execute Tool via Real MCP';
+      }
+    }
+
+    // =========================================================================
+    // HITL Approvals Hub & Modal Logic
+    // =========================================================================
+    let allApprovalsData = [];
+    let currentApprovalFilter = 'all';
+    let currentViewingApproval = null;
+    let approvalsPollInterval = null;
+
+    function getAuthHeaders() {
+      const headers = { 'Content-Type': 'application/json' };
+      const token = localStorage.getItem('hermes_token');
+      if (token) headers['Authorization'] = `Bearer ${token}`;
+      const user = localStorage.getItem('hermes_user');
+      if (user) {
+        try {
+          const parsed = JSON.parse(user);
+          if (parsed.tenant_id) headers['X-Tenant-Id'] = parsed.tenant_id;
+          if (parsed.id) headers['X-User-Id'] = parsed.id;
+        } catch(e) {}
+      }
+      return headers;
+    }
+
+    function getStatusBadgeHtml(status) {
+      const s = (status || 'pending').toLowerCase();
+      switch(s) {
+        case 'pending':
+          return `<span class="status-pill-badge status-awaiting">🟡 Awaiting approval</span>`;
+        case 'approved':
+          return `<span class="status-pill-badge status-approved">🟢 Approved</span>`;
+        case 'rejected':
+          return `<span class="status-pill-badge status-rejected">🔴 Rejected</span>`;
+        case 'expired':
+          return `<span class="status-pill-badge status-expired">⏰ Expired</span>`;
+        case 'executing':
+          return `<span class="status-pill-badge status-executing">⚙️ Executing...</span>`;
+        case 'executed':
+        case 'completed':
+          return `<span class="status-pill-badge status-completed">✅ Completed</span>`;
+        case 'failed':
+        case 'error':
+          return `<span class="status-pill-badge status-failed">❌ Failed</span>`;
+        default:
+          return `<span class="status-pill-badge status-awaiting">${escapeHtml(status)}</span>`;
+      }
+    }
+
+    function getRiskBannerHtml(riskLevel, reason) {
+      const rl = (riskLevel || 'high').toLowerCase();
+      const riskClass = rl === 'critical' || rl === 'high' ? 'risk-banner-high' : (rl === 'medium' ? 'risk-banner-medium' : 'risk-banner-low');
+      const tagClass = rl === 'critical' || rl === 'high' ? 'risk-high' : (rl === 'medium' ? 'risk-medium' : 'risk-low');
+      return `
+        <div class="risk-banner ${riskClass}">
+          <div style="display: flex; align-items: center; gap: 0.5rem;">
+            <span class="risk-tag ${tagClass}">${escapeHtml((riskLevel || 'HIGH').toUpperCase())} RISK</span>
+            <span style="font-weight: 700; font-size: 0.8rem;">Action Blocked (HITL Protection)</span>
+          </div>
+          <div style="font-size: 0.78rem; line-height: 1.4; opacity: 0.95;">
+            ${escapeHtml(reason || 'High-risk tool operation requires operator authorization before execution.')}
+          </div>
+        </div>
+      `;
+    }
+
+    async function loadApprovals() {
+      try {
+        const resp = await fetch('/api/approvals', { headers: getAuthHeaders() });
+        let list = [];
+        if (resp.ok) {
+          const data = await resp.json();
+          list = data.approvals || [];
+        } else {
+          // Fallback to pending endpoint
+          const pResp = await fetch('/approvals/pending', { headers: getAuthHeaders() });
+          if (pResp.ok) {
+            const pData = await pResp.json();
+            list = pData.pending_approvals || [];
+          }
+        }
+        allApprovalsData = list;
+        updateApprovalStatsRibbon();
+        renderApprovals();
+      } catch (err) {
+        console.error('Failed to load approvals:', err);
+        const container = document.getElementById('approvals-cards-container');
+        if (container) {
+          container.innerHTML = `<div style="color: var(--danger); padding: 2rem;">Error connecting to approvals API: ${escapeHtml(err.message)}</div>`;
+        }
+      }
+    }
+
+    function updateApprovalStatsRibbon() {
+      const pendingCount = allApprovalsData.filter(a => a.status === 'pending').length;
+      const approvedCount = allApprovalsData.filter(a => a.status === 'approved').length;
+      const executedCount = allApprovalsData.filter(a => a.status === 'executed').length;
+      const rejectedCount = allApprovalsData.filter(a => a.status === 'rejected').length;
+      const expiredCount = allApprovalsData.filter(a => a.status === 'expired').length;
+
+      const pEl = document.getElementById('stat-approvals-pending');
+      if (pEl) pEl.innerText = pendingCount;
+      const aEl = document.getElementById('stat-approvals-approved');
+      if (aEl) aEl.innerText = approvedCount;
+      const eEl = document.getElementById('stat-approvals-executed');
+      if (eEl) eEl.innerText = executedCount;
+      const rEl = document.getElementById('stat-approvals-rejected');
+      if (rEl) rEl.innerText = rejectedCount;
+      const expEl = document.getElementById('stat-approvals-expired');
+      if (expEl) expEl.innerText = expiredCount;
+
+      const navBadge = document.getElementById('nav-pending-badge');
+      if (navBadge) {
+        if (pendingCount > 0) {
+          navBadge.innerText = pendingCount;
+          navBadge.style.display = 'inline-block';
+        } else {
+          navBadge.style.display = 'none';
+        }
+      }
+    }
+
+    function setApprovalFilter(status) {
+      currentApprovalFilter = status;
+      document.querySelectorAll('#approval-filter-pills .filter-pill').forEach(btn => {
+        const text = btn.innerText.toLowerCase();
+        if (status === 'all' && text === 'all') btn.classList.add('active');
+        else if (status === 'pending' && text.includes('awaiting')) btn.classList.add('active');
+        else if (status === 'executed' && text.includes('completed')) btn.classList.add('active');
+        else if (text === status) btn.classList.add('active');
+        else btn.classList.remove('active');
+      });
+      renderApprovals();
+    }
+
+    function filterApprovals() {
+      renderApprovals();
+    }
+
+    function renderApprovals() {
+      const container = document.getElementById('approvals-cards-container');
+      if (!container) return;
+
+      const query = (document.getElementById('approval-search-input')?.value || '').toLowerCase().trim();
+
+      const filtered = allApprovalsData.filter(a => {
+        if (currentApprovalFilter === 'pending' && a.status !== 'pending') return false;
+        if (currentApprovalFilter === 'approved' && a.status !== 'approved') return false;
+        if (currentApprovalFilter === 'rejected' && a.status !== 'rejected') return false;
+        if (currentApprovalFilter === 'expired' && a.status !== 'expired') return false;
+        if (currentApprovalFilter === 'executing' && a.status !== 'executing') return false;
+        if (currentApprovalFilter === 'executed' && a.status !== 'executed') return false;
+        if (currentApprovalFilter === 'failed' && a.status !== 'failed') return false;
+
+        if (query) {
+          const matchTarget = `${a.approval_id} ${a.tool_name} ${a.command || ''} ${a.working_directory || ''} ${a.tenant_id} ${a.user_id} ${JSON.stringify(a.affected_files || [])}`.toLowerCase();
+          if (!matchTarget.includes(query)) return false;
+        }
+
+        return true;
+      });
+
+      if (!filtered.length) {
+        container.innerHTML = `
+          <div style="grid-column: 1/-1; text-align: center; padding: 3rem 1rem; color: var(--text-muted); background: #F8FAFC; border: 1px dashed var(--border); border-radius: 12px;">
+            <div style="font-size: 2rem; margin-bottom: 0.5rem;">⚖️</div>
+            <div style="font-weight: 600; font-size: 0.95rem; color: #0F172A;">No approval records match your criteria</div>
+            <div style="font-size: 0.8rem; margin-top: 0.25rem;">Switch filters or trigger high-risk actions to inspect Human-in-the-Loop gating.</div>
+          </div>
+        `;
+        return;
+      }
+
+      let html = '';
+      filtered.forEach(appr => {
+        const toolName = appr.tool_name || 'unknown';
+        const icon = getServerIcon(toolName.split('.')[0]);
+        const cmd = appr.command || `${toolName}()`;
+        const workDir = appr.working_directory || '.';
+        const files = Array.isArray(appr.affected_files) ? appr.affected_files : [];
+        const filesHtml = files.length > 0 
+          ? files.map(f => `<span class="scope-pill">📄 ${escapeHtml(f)}</span>`).join(' ')
+          : '<span class="scope-pill" style="opacity: 0.7;">Default Workspace Scope</span>';
+
+        const isPending = (appr.status === 'pending');
+
+        const now = Date.now() / 1000;
+        let expiresNotice = '';
+        if (isPending && appr.expires_at) {
+          const remaining = Math.round(appr.expires_at - now);
+          if (remaining > 0) {
+            const mins = Math.floor(remaining / 60);
+            const secs = remaining % 60;
+            expiresNotice = `⏱️ Expires in: ${mins}m ${secs}s`;
+          } else {
+            expiresNotice = `⏰ Expired`;
+          }
+        }
+
+        html += `
+          <div class="approval-card" id="card-${appr.approval_id}">
+            <div class="approval-card-header">
+              <div style="display: flex; align-items: center; gap: 0.5rem;">
+                <span style="font-size: 1.25rem;">${icon}</span>
+                <div>
+                  <div style="font-weight: 800; font-size: 0.95rem; color: #0F172A; letter-spacing: -0.2px;">
+                    ${escapeHtml(toolName)}
+                  </div>
+                  <div style="font-family: var(--mono); font-size: 0.68rem; color: #64748B;">
+                    ID: ${escapeHtml(appr.approval_id.substring(0, 18))}...
+                  </div>
+                </div>
+              </div>
+              <div id="status-badge-${appr.approval_id}">
+                ${getStatusBadgeHtml(appr.status)}
+              </div>
+            </div>
+
+            <div class="approval-card-body">
+              ${getRiskBannerHtml(appr.risk_level, appr.reason)}
+
+              <div>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.25rem;">
+                  <span style="font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: #64748B;">Exact Command</span>
+                  <button class="btn-copy-small" onclick="copyText('${escapeHtml(cmd.replace(/'/g, "\\'"))}', this)">📋 Copy</button>
+                </div>
+                <div class="approval-cmd-box">
+                  <code>$ ${escapeHtml(cmd)}</code>
+                </div>
+              </div>
+
+              <div class="approval-meta-row">
+                <div class="approval-meta-item">
+                  <span>📁</span> <strong>Dir:</strong> <span style="font-family: var(--mono); font-size: 0.72rem;">${escapeHtml(workDir)}</span>
+                </div>
+                <div class="approval-meta-item">
+                  <span>🏢</span> <strong>Tenant:</strong> <span>${escapeHtml(appr.tenant_id || 'default')}</span>
+                </div>
+                <div class="approval-meta-item">
+                  <span>👤</span> <strong>User:</strong> <span>${escapeHtml(appr.user_id || 'default')}</span>
+                </div>
+                ${expiresNotice ? `<div class="approval-meta-item" style="color: #D97706; font-weight: 600;">${expiresNotice}</div>` : ''}
+              </div>
+
+              <div>
+                <span style="font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: #64748B; display: block; margin-bottom: 0.35rem;">Affected Files / Scope:</span>
+                <div style="display: flex; flex-wrap: wrap; gap: 0.35rem;">
+                  ${filesHtml}
+                </div>
+              </div>
+            </div>
+
+            <div class="approval-card-footer" id="actions-${appr.approval_id}">
+              <div style="display: flex; gap: 0.45rem;">
+                ${isPending ? `
+                  <button class="btn-approve-action" onclick="handleCardApproval('${appr.approval_id}', true, this)">
+                    ✔ Approve &amp; Execute
+                  </button>
+                  <button class="btn-reject-action" onclick="handleCardApproval('${appr.approval_id}', false, this)">
+                    ✖ Reject
+                  </button>
+                ` : `
+                  <span style="font-size: 0.78rem; font-weight: 600; color: #64748B;">
+                    ${appr.status === 'executed' ? '✔ Executed successfully' : (appr.status === 'rejected' ? '✖ Rejected by operator' : (appr.status === 'expired' ? '⏰ Expired' : 'State: ' + appr.status))}
+                  </span>
+                `}
+              </div>
+              <button class="btn-inspect-action" onclick="openApprovalModal('${appr.approval_id}')">
+                🔍 Full Details
+              </button>
+            </div>
+          </div>
+        `;
+      });
+
+      container.innerHTML = html;
+    }
+
+    async function handleCardApproval(approvalId, approve, btnElement) {
+      const actionsContainer = document.getElementById(`actions-${approvalId}`);
+      const statusBadge = document.getElementById(`status-badge-${approvalId}`);
+
+      if (btnElement) btnElement.disabled = true;
+      if (statusBadge) statusBadge.innerHTML = `<span class="status-pill-badge status-executing">⚙️ Executing...</span>`;
+
+      try {
+        const resp = await fetch(`/approvals/${approvalId}`, {
+          method: 'POST',
+          headers: getAuthHeaders(),
+          body: JSON.stringify({
+            approve: approve,
+            decided_by: 'operator'
+          })
+        });
+
+        const data = await resp.json();
+        if (!resp.ok) {
+          throw new Error(data.detail || `HTTP ${resp.status}`);
+        }
+
+        const newStatus = approve ? 'executed' : 'rejected';
+        if (statusBadge) statusBadge.innerHTML = getStatusBadgeHtml(newStatus);
+        if (actionsContainer) {
+          actionsContainer.innerHTML = `
+            <span style="font-size: 0.8rem; font-weight: 600; color: ${approve ? '#059669' : '#DC2626'};">
+              ${approve ? '✔ Approved & Executed' : '✖ Rejected'}
+            </span>
+            <button class="btn-inspect-action" onclick="openApprovalModal('${approvalId}')">
+              🔍 Full Details
+            </button>
+          `;
+        }
+
+        loadApprovals();
+      } catch (err) {
+        if (statusBadge) statusBadge.innerHTML = `<span class="status-pill-badge status-failed">❌ Failed</span>`;
+        alert(`Approval decision failed: ${err.message}`);
+      }
+    }
+
+    async function openApprovalModal(approvalId) {
+      currentViewingApproval = null;
+      document.getElementById('modal-approval-id').innerText = `ID: ${approvalId}`;
+      document.getElementById('approval-modal-backdrop').classList.add('open');
+      document.getElementById('approval-modal').classList.add('open');
+
+      try {
+        const resp = await fetch(`/approvals/${approvalId}`, { headers: getAuthHeaders() });
+        if (!resp.ok) {
+          const errData = await resp.json().catch(() => ({}));
+          throw new Error(errData.detail || `HTTP ${resp.status}`);
+        }
+
+        const record = await resp.json();
+        currentViewingApproval = record;
+
+        document.getElementById('modal-approval-title').innerText = `Approval: ${record.tool_name}`;
+        document.getElementById('modal-approval-id').innerText = `ID: ${record.approval_id}`;
+
+        const statusPill = document.getElementById('modal-status-pill');
+        statusPill.innerHTML = getStatusBadgeHtml(record.status);
+        document.getElementById('modal-risk-level-tag').innerText = `${(record.risk_level || 'HIGH').toUpperCase()} RISK`;
+        document.getElementById('modal-risk-explanation').innerText = record.reason || 'High-risk tool call requires authorization.';
+
+        const bannerEl = document.getElementById('modal-risk-banner');
+        const rl = (record.risk_level || 'high').toLowerCase();
+        bannerEl.className = `risk-banner ${rl === 'critical' || rl === 'high' ? 'risk-banner-high' : (rl === 'medium' ? 'risk-banner-medium' : 'risk-banner-low')}`;
+
+        document.getElementById('modal-operation-val').innerText = `${record.tool_name} (Tool)`;
+        document.getElementById('modal-workdir-val').innerText = record.working_directory || '.';
+        
+        const files = Array.isArray(record.affected_files) ? record.affected_files : [];
+        document.getElementById('modal-files-val').innerHTML = files.length > 0
+          ? files.map(f => `<span class="scope-pill">📄 ${escapeHtml(f)}</span>`).join(' ')
+          : '<span class="scope-pill">Default Workspace Scope</span>';
+
+        document.getElementById('modal-tenant-user-val').innerText = `${record.tenant_id} • ${record.user_id}`;
+        
+        const createdDate = new Date(record.created_at * 1000).toLocaleString();
+        const expiresDate = record.expires_at ? new Date(record.expires_at * 1000).toLocaleString() : 'N/A';
+        document.getElementById('modal-timestamps-val').innerText = `Created: ${createdDate} | Expires: ${expiresDate}`;
+
+        const cmd = record.command || `${record.tool_name}()`;
+        document.getElementById('modal-exact-command').innerHTML = `<code>$ ${escapeHtml(cmd)}</code>`;
+        document.getElementById('modal-arguments-json').innerHTML = `<code>${escapeHtml(JSON.stringify(record.arguments || {}, null, 2))}</code>`;
+
+        const footer = document.getElementById('modal-action-footer');
+        if (record.status === 'pending') {
+          footer.innerHTML = `
+            <button class="btn-approve-action" onclick="handleModalAction(true)">✔ Approve &amp; Execute</button>
+            <button class="btn-reject-action" onclick="handleModalAction(false)">✖ Reject Operation</button>
+          `;
+        } else {
+          footer.innerHTML = `
+            <span style="font-size: 0.82rem; font-weight: 600; color: #64748B; margin-right: auto;">
+              Status: ${escapeHtml(record.status.toUpperCase())} ${record.decided_by ? 'by ' + escapeHtml(record.decided_by) : ''}
+            </span>
+            <button class="btn-inspect-action" onclick="closeApprovalModal()">Close</button>
+          `;
+        }
+      } catch (err) {
+        alert(`Failed to load approval details: ${err.message}`);
+        closeApprovalModal();
+      }
+    }
+
+    function closeApprovalModal() {
+      document.getElementById('approval-modal-backdrop').classList.remove('open');
+      document.getElementById('approval-modal').classList.remove('open');
+      currentViewingApproval = null;
+    }
+
+    async function handleModalAction(approve) {
+      if (!currentViewingApproval) return;
+      const approvalId = currentViewingApproval.approval_id;
+      const footer = document.getElementById('modal-action-footer');
+      footer.innerHTML = `<span style="font-size: 0.85rem; color: #0284C7; font-weight: 600;">⚙️ Submitting ${approve ? 'Approval & Executing' : 'Rejection'}...</span>`;
+
+      try {
+        const resp = await fetch(`/approvals/${approvalId}`, {
+          method: 'POST',
+          headers: getAuthHeaders(),
+          body: JSON.stringify({
+            approve: approve,
+            decided_by: 'operator'
+          })
+        });
+
+        const data = await resp.json();
+        if (!resp.ok) {
+          throw new Error(data.detail || `HTTP ${resp.status}`);
+        }
+
+        footer.innerHTML = `
+          <span style="font-size: 0.85rem; font-weight: 700; color: ${approve ? '#059669' : '#DC2626'}; margin-right: auto;">
+            ${approve ? '✔ Approved & Executed successfully' : '✖ Rejected'}
+          </span>
+          <button class="btn-inspect-action" onclick="closeApprovalModal()">Close</button>
+        `;
+        loadApprovals();
+      } catch (err) {
+        alert(`Failed to decide approval: ${err.message}`);
+        footer.innerHTML = `
+          <button class="btn-approve-action" onclick="handleModalAction(true)">✔ Approve &amp; Execute</button>
+          <button class="btn-reject-action" onclick="handleModalAction(false)">✖ Reject Operation</button>
+        `;
+      }
+    }
+
+    function copyModalCommand() {
+      if (!currentViewingApproval) return;
+      const cmd = currentViewingApproval.command || `${currentViewingApproval.tool_name}()`;
+      navigator.clipboard.writeText(cmd).then(() => {
+        alert('Command copied to clipboard!');
+      });
+    }
+
+    function copyText(text, btn) {
+      navigator.clipboard.writeText(text).then(() => {
+        if (btn) {
+          const orig = btn.innerText;
+          btn.innerText = '✔ Copied';
+          setTimeout(() => { btn.innerText = orig; }, 1500);
+        }
+      });
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      loadServers();
+      loadApprovals();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+{
+  "name": "filesystem",
+  "transport": "stdio",
+  "command": "python",
+  "args": ["-m", "src.mcp_servers.filesystem_server"],
+  "risk_level": "medium",
+  "timeout_seconds": 15,
+  "tools": [
+    {
+      "name": "filesystem.read_file",
+      "description": "Read the text content of a file in the workspace.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "path": { "type": "string", "description": "Relative path to file in workspace" }
+        },
+        "required": ["path"]
+      }
+    },
+    {
+      "name": "filesystem.write_file",
+      "description": "Write or overwrite content to a file in the workspace.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "path": { "type": "string", "description": "Relative path to file in workspace" },
+          "content": { "type": "string", "description": "Text content to write" }
+        },
+        "required": ["path", "content"]
+      }
+    },
+    {
+      "name": "filesystem.list_directory",
+      "description": "List files and subdirectories in a workspace directory.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "path": { "type": "string", "description": "Relative directory path (defaults to root workspace)", "default": "." }
+        }
+      }
+    }
+  ]
+}

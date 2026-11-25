@@ -1,0 +1,31 @@
+{
+  "name": "web_scraper",
+  "transport": "stdio",
+  "command": "python",
+  "args": ["-m", "src.mcp_servers.web_scraper_server"],
+  "risk_level": "low",
+  "timeout_seconds": 20,
+  "tools": [
+    {
+      "name": "web_scraper.search",
+      "description": "Search the web and return top result snippets with URLs.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "query": { "type": "string" },
+          "max_results": { "type": "integer", "default": 5 }
+        },
+        "required": ["query"]
+      }
+    },
+    {
+      "name": "web_scraper.read_url",
+      "description": "Fetch and extract the main text content of a given URL.",
+      "parameters": {
+        "type": "object",
+        "properties": { "url": { "type": "string" } },
+        "required": ["url"]
+      }
+    }
+  ]
+}

@@ -1,0 +1,60 @@
+{
+  "name": "github",
+  "transport": "stdio",
+  "command": "python",
+  "args": ["-m", "src.mcp_servers.github_server"],
+  "risk_level": "low",
+  "timeout_seconds": 15,
+  "tools": [
+    {
+      "name": "github.search_repositories",
+      "description": "Search public repositories on GitHub by query string.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "query": { "type": "string", "description": "Search query like 'language:python topic:agent'" },
+          "limit": { "type": "integer", "description": "Max results to return (default 5)", "default": 5 }
+        },
+        "required": ["query"]
+      }
+    },
+    {
+      "name": "github.get_repository",
+      "description": "Get detailed metadata for a GitHub repository.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "owner": { "type": "string", "description": "Repository owner or organization (e.g. 'octocat')" },
+          "repo": { "type": "string", "description": "Repository name (e.g. 'Hello-World')" }
+        },
+        "required": ["owner", "repo"]
+      }
+    },
+    {
+      "name": "github.list_issues",
+      "description": "List issues for a specific GitHub repository.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "owner": { "type": "string", "description": "Repository owner (e.g. 'octocat')" },
+          "repo": { "type": "string", "description": "Repository name (e.g. 'Hello-World')" },
+          "state": { "type": "string", "description": "Filter by state: 'open', 'closed', 'all'", "default": "open" },
+          "limit": { "type": "integer", "description": "Max issues to return (default 5)", "default": 5 }
+        },
+        "required": ["owner", "repo"]
+      }
+    },
+    {
+      "name": "github.list_user_repositories",
+      "description": "List public repositories belonging to a specific GitHub user or organization.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "username": { "type": "string", "description": "GitHub username or organization name (e.g. 'octocat')" },
+          "limit": { "type": "integer", "description": "Max repositories to return (default 10)", "default": 10 }
+        },
+        "required": ["username"]
+      }
+    }
+  ]
+}
