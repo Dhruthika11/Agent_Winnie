@@ -88,6 +88,24 @@ async def lifespan(app: FastAPI):
 app = FastAPI(title="Hermes Agent Platform", version="0.1.0", lifespan=lifespan)
 
 
+@app.middleware("http")
+async def trace_correlation_middleware(request: Request, call_next):
+    req_id = request.headers.get("X-Request-ID") or f"req_{uuid.uuid4().hex[:12]}"
+    request.state.request_id = req_id
+
+    response = await call_next(request)
+    response.headers["X-Request-ID"] = req_id
+
+    trace_id = getattr(request.state, "trace_id", None)
+    if trace_id:
+        response.headers["X-Trace-ID"] = trace_id
+    exec_id = getattr(request.state, "execution_id", None)
+    if exec_id:
+        response.headers["X-Execution-ID"] = exec_id
+
+    return response
+
+
 class ChatRequest(BaseModel):
     user_id: str
     session_id: str | None = None
@@ -133,6 +151,8 @@ class ChatResponse(BaseModel):
     model: str | None = None
     task_type: str | None = None
     latency_ms: float | None = None
+    trace_id: str | None = None
+    execution_id: str | None = None
 
 
 class ApprovalDecision(BaseModel):
@@ -607,6 +627,9 @@ def chat(
         except Exception:
             logger.warning("langfuse_trace_creation_failed", exc_info=True)
 
+    if not trace_id:
+        trace_id = f"tr_{uuid.uuid4()}"
+
     root_span = None
     if trace and lf:
         try:
@@ -619,6 +642,8 @@ def chat(
             pass
 
     exec_id = f"exec_{uuid.uuid4().hex[:12]}"
+    request.state.trace_id = trace_id
+    request.state.execution_id = exec_id
     initial_state = {
         "messages": [{"role": "user", "content": req.message}],
         "user_id": effective_user_id,
@@ -785,12 +810,14 @@ def chat(
         model=agent_router.last_dispatched_model,
         task_type=agent_router.last_detected_task,
         latency_ms=round((time.perf_counter() - chat_start) * 1000, 1),
+        trace_id=trace_id,
+        execution_id=exec_id,
     )
 
     # Save to Redis for Idempotency
     if redis_client and idempotency_key:
         try:
-            redis_client.setex(f"hermes:idempotency:{idempotency_key}", 3600, response_obj.model_dump_json())
+            redis_client.setex(f"hermes:idempotency:{effective_tenant_id}:{idempotency_key}", 3600, response_obj.model_dump_json())
         except Exception:
             pass
 
@@ -1244,6 +1271,7 @@ def decide_approval(
         except Exception:
             pass
 
+    st = record.get("state") or {}
     return ChatResponse(
         user_id=record.get("user_id", "unknown"),
         session_id=record.get("session_id", "default"),
@@ -1251,6 +1279,8 @@ def decide_approval(
         stop_reason=stop_reason,
         awaiting_approval=awaiting_approval,
         approval_id=next_approval_id,
+        trace_id=st.get("trace_id"),
+        execution_id=st.get("execution_id"),
     )
 
 
@@ -1608,40 +1638,77 @@ def get_learning_metrics():
 
 
 # ==============================================================================
-# Workflow Observability & Execution Monitor Endpoints
+# Live Observability, Trace Explorer, and Evaluation Endpoints
 # ==============================================================================
 
+@app.get("/observability", response_class=HTMLResponse)
+@app.get("/workflows/monitor", response_class=HTMLResponse)
+def get_observability_dashboard():
+    """Render the comprehensive Live Observability, Trace Explorer, and Evaluation dashboard."""
+    from src.workflows.observability import workflow_observability_engine
+    return workflow_observability_engine.generate_html_dashboard()
+
+
+@app.get("/api/observability/summary")
+def get_observability_summary():
+    """Calculate and return real-time operational and FinOps metrics directly from PostgreSQL."""
+    from src.workflows.observability import workflow_observability_engine
+    return workflow_observability_engine.get_summary_metrics().model_dump()
+
+
+@app.get("/api/observability/traces")
+def list_observability_traces(limit: int = 50, search: Optional[str] = None):
+    """Return recent actual workflow execution traces from PostgreSQL."""
+    from src.workflows.observability import workflow_observability_engine
+    traces = workflow_observability_engine.list_recent_traces(limit=limit, search=search)
+    return {"traces": traces, "count": len(traces)}
+
+
+@app.get("/api/observability/traces/{trace_id}")
+def get_observability_trace_detail(trace_id: str):
+    """Return full trace detail with nested observation spans, tool executions, and routing events."""
+    from src.workflows.observability import workflow_observability_engine
+    trace = workflow_observability_engine.get_trace_detail(trace_id)
+    if not trace:
+        raise HTTPException(status_code=404, detail=f"Trace '{trace_id}' not found")
+    return trace
+
+
+@app.get("/api/observability/evaluations")
+def get_evaluation_history():
+    """Return historical evaluation test run reports."""
+    from src.workflows.observability import workflow_observability_engine
+    return workflow_observability_engine.get_evaluation_history()
+
+
+@app.post("/api/observability/evaluations/run")
+def trigger_live_evaluation(base_url: str = "http://localhost:8080"):
+    """Trigger a live evaluation suite run against the running Hermes application."""
+    from src.workflows.observability import workflow_observability_engine
+    return workflow_observability_engine.run_live_evaluation(base_url=base_url)
+
+
+# Legacy compatibility routes
 @app.get("/api/workflows/metrics")
 def get_workflow_platform_metrics():
-    """Return aggregated workflow execution metrics (success rate, avg latency, tool calls, FinOps cost)."""
     from src.workflows.observability import workflow_observability_engine
-    summary = workflow_observability_engine.get_platform_summary()
-    return summary.model_dump()
+    return workflow_observability_engine.get_summary_metrics().model_dump()
 
 
 @app.get("/api/workflows/traces")
 def list_workflow_traces(limit: int = 50):
-    """Return recent workflow execution traces with node-by-node durations and statuses."""
     from src.workflows.observability import workflow_observability_engine
     traces = workflow_observability_engine.list_recent_traces(limit=limit)
-    return {"traces": [t.model_dump() for t in traces], "count": len(traces)}
+    return {"traces": traces, "count": len(traces)}
 
 
 @app.get("/api/workflows/traces/{trace_id}")
 def get_workflow_trace_detail(trace_id: str):
-    """Return detailed trace metrics and node execution breakdown for a specific execution."""
     from src.workflows.observability import workflow_observability_engine
-    trace = workflow_observability_engine.get_trace(trace_id)
+    trace = workflow_observability_engine.get_trace_detail(trace_id)
     if not trace:
         raise HTTPException(status_code=404, detail=f"Workflow trace '{trace_id}' not found")
-    return trace.model_dump()
-
-
-@app.get("/workflows/monitor", response_class=HTMLResponse)
-def get_workflow_monitor_dashboard():
-    """Render the dedicated Workflow Execution Monitor dashboard UI."""
-    from src.workflows.observability import workflow_observability_engine
-    return workflow_observability_engine.generate_html_dashboard()
+    return trace
 
 
 

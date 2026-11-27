@@ -83,3 +83,45 @@ def get_langfuse_client():
 
 def get_tracer(name: str = "hermes-agent"):
     return trace.get_tracer(name)
+
+
+import re
+
+SENSITIVE_KEY_PATTERNS = {
+    "password", "secret", "api_key", "apikey", "access_token",
+    "private_key", "authorization", "secret_key", "master_key", "token"
+}
+
+TOKEN_REGEXES = [
+    re.compile(r"gsk_[A-Za-z0-9_-]{15,}", re.IGNORECASE),
+    re.compile(r"sk-[A-Za-z0-9_-]{15,}", re.IGNORECASE),
+    re.compile(r"ghp_[A-Za-z0-9_-]{15,}", re.IGNORECASE),
+    re.compile(r"Bearer\s+[A-Za-z0-9\-\._~+/]+=*", re.IGNORECASE),
+    re.compile(r"ey[A-Za-z0-9_-]{15,}\.[A-Za-z0-9_-]{15,}\.[A-Za-z0-9_-]{15,}", re.IGNORECASE),
+]
+
+
+def sanitize_payload(val: Any) -> Any:
+    """Recursively redact sensitive tokens, passwords, and API keys from telemetry payloads."""
+    if val is None:
+        return None
+    if isinstance(val, str):
+        res = val
+        for rx in TOKEN_REGEXES:
+            res = rx.sub("[REDACTED_CREDENTIAL]", res)
+        return res
+    if isinstance(val, dict):
+        sanitized = {}
+        for k, v in val.items():
+            k_lower = str(k).lower()
+            if any(p in k_lower for p in SENSITIVE_KEY_PATTERNS):
+                sanitized[k] = "[REDACTED]"
+            else:
+                sanitized[k] = sanitize_payload(v)
+        return sanitized
+    if isinstance(val, list):
+        return [sanitize_payload(x) for x in val]
+    if isinstance(val, tuple):
+        return tuple(sanitize_payload(x) for x in val)
+    return val
+

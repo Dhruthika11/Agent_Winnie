@@ -460,6 +460,10 @@ class MultiProviderRouter:
     def last_detected_task(self) -> str:
         return getattr(self, "_last_detected_task", "general")
 
+    @property
+    def last_routing_events(self) -> list[dict[str, Any]]:
+        return getattr(self, "_last_routing_events", [])
+
     def get_active_cooldowns(self) -> set[str]:
         """Return the set of models currently in cooldown."""
         try:
@@ -575,17 +579,37 @@ class MultiProviderRouter:
             max_total_attempts = 2  # Hard bounded retry budget across the whole request
             tried_providers: set[str] = set()
             last_error: Exception | None = None
+            routing_events: list[dict[str, Any]] = []
+
+            trace_id = kwargs.get("trace_id")
+            parent_span_id = kwargs.get("parent_span_id")
+            from src.utils.telemetry import get_langfuse_client
+            lf = get_langfuse_client()
 
             for candidate in candidate_models:
                 provider = extract_provider_from_model(candidate)
                 # If provider circuit breaker is tripped, skip this candidate
                 if not provider_circuit_breaker.is_available(provider):
                     logger.info(f"Skipping candidate '{candidate}': provider '{provider}' is currently in cooldown/unhealthy.")
+                    routing_events.append({
+                        "attempt": attempt_count,
+                        "model": candidate,
+                        "provider": provider,
+                        "status": "skipped",
+                        "reason": "circuit_breaker_open",
+                    })
                     continue
 
                 # Quota-awareness: if previous candidate on this provider failed due to TPM/rate quota, do not repeat on same quota
                 if provider in tried_providers:
                     logger.info(f"Skipping candidate '{candidate}': provider '{provider}' quota was already exhausted in this request.")
+                    routing_events.append({
+                        "attempt": attempt_count,
+                        "model": candidate,
+                        "provider": provider,
+                        "status": "skipped",
+                        "reason": "provider_quota_exhausted",
+                    })
                     continue
 
                 if attempt_count >= max_total_attempts:
@@ -593,6 +617,7 @@ class MultiProviderRouter:
                     break
 
                 attempt_count += 1
+                t0_cand = time.perf_counter()
                 try:
                     kwargs_call = dict(kwargs)
                     kwargs_call["model"] = candidate
@@ -604,11 +629,66 @@ class MultiProviderRouter:
                     )
                     res = self.router.completion(**kwargs_call)
                     provider_circuit_breaker.record_success(provider)
+                    dur_ms = round((time.perf_counter() - t0_cand) * 1000, 1)
+                    routing_events.append({
+                        "attempt": attempt_count,
+                        "model": candidate,
+                        "provider": provider,
+                        "status": "success",
+                        "latency_ms": dur_ms,
+                    })
+                    self._last_routing_events = routing_events
+
+                    if lf and trace_id:
+                        try:
+                            s = lf.span(
+                                trace_id=trace_id,
+                                parent_observation_id=parent_span_id,
+                                name=f"llm_candidate:{candidate}",
+                                input={"attempt": attempt_count, "provider": provider},
+                                metadata={"status": "success", "latency_ms": dur_ms},
+                            )
+                            s.end(output="success")
+                        except Exception:
+                            pass
+
                     return res
                 except Exception as exc:
+                    dur_ms = round((time.perf_counter() - t0_cand) * 1000, 1)
                     last_error = exc
                     classified = error_classifier.classify(exc, model=candidate)
                     provider_circuit_breaker.record_failure(provider, classified)
+
+                    routing_events.append({
+                        "attempt": attempt_count,
+                        "model": candidate,
+                        "provider": provider,
+                        "status": "failed",
+                        "error_category": classified.category.value,
+                        "error_message": str(exc),
+                        "latency_ms": dur_ms,
+                        "action": classified.recommended_action,
+                    })
+                    self._last_routing_events = routing_events
+
+                    if lf and trace_id:
+                        try:
+                            s = lf.span(
+                                trace_id=trace_id,
+                                parent_observation_id=parent_span_id,
+                                name=f"llm_candidate:{candidate}",
+                                input={"attempt": attempt_count, "provider": provider},
+                                metadata={
+                                    "status": "failed",
+                                    "error_category": classified.category.value,
+                                    "error_message": str(exc),
+                                    "latency_ms": dur_ms,
+                                    "action": classified.recommended_action,
+                                },
+                            )
+                            s.end(level="ERROR", status_message=f"{classified.category.value}: {exc}")
+                        except Exception:
+                            pass
 
                     logger.warning(
                         f"Model candidate '{candidate}' failed [{classified.category.value}] ({exc}). "
@@ -651,6 +731,8 @@ class MultiProviderRouter:
                     f"All model providers in task hierarchy failed for '{task_type}'. Last error: {last_error}"
                 ) from last_error
 
+        if "model" not in kwargs:
+            kwargs["model"] = LOGICAL_AGENT_MODEL
         return self.router.completion(**kwargs)
 
     def get_status(self) -> dict[str, Any]:

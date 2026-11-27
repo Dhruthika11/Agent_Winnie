@@ -246,6 +246,9 @@ def call_model(state: AgentState, config: Optional[RunnableConfig] = None) -> di
                 tool_choice=final_tool_choice,
                 max_tokens=2000,
                 stream=True,
+                trace_id=state.get("trace_id"),
+                parent_span_id=state.get("parent_span_id"),
+                user_id=state.get("user_id"),
             )
             for chunk in stream_iter:
                 if not chunk.choices:
@@ -350,6 +353,9 @@ def call_model(state: AgentState, config: Optional[RunnableConfig] = None) -> di
                 tools=final_tools,
                 tool_choice=final_tool_choice,
                 max_tokens=2000,
+                trace_id=state.get("trace_id"),
+                parent_span_id=state.get("parent_span_id"),
+                user_id=state.get("user_id"),
             )
         except Exception as exc:
             logger.warning(f"router_completion_failed ({exc}). Attempting recovery completion without tools.")
@@ -367,6 +373,7 @@ def call_model(state: AgentState, config: Optional[RunnableConfig] = None) -> di
                 response = agent_router.completion(
                     messages=[{"role": "system", "content": recovery_budget_res.system_prompt}] + recovery_budget_res.messages,
                     tools=None,
+                    model=agent_router.last_dispatched_model or settings.model_name or LOGICAL_AGENT_MODEL,
                     max_tokens=2000,
                 )
             except Exception as fb_exc:
@@ -581,6 +588,8 @@ def call_model(state: AgentState, config: Optional[RunnableConfig] = None) -> di
                     "intent": user_intent.category.value,
                     "confidence": user_intent.confidence,
                     "is_action_proposal": user_intent.is_action_proposal,
+                    "routing_events": agent_router.last_routing_events,
+                    "fallback_occurred": len(agent_router.last_routing_events) > 1,
                 },
             )
             gen.end(output=assistant_content or str(pending_calls))
