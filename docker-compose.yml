@@ -124,6 +124,7 @@ services:
       - POSTGRES_URL=postgresql://${POSTGRES_USER:-hermes}:${POSTGRES_PASSWORD:-hermes}@postgres:5432/${POSTGRES_DB:-hermes_agent}
       - SANDBOX_MCP_URL=http://sandbox-mcp:8005/sse
       - MEM0_VECTOR_STORE_URL=http://qdrant:6333
+      - LANGFUSE_HOST=http://langfuse:3000
     command: ["uvicorn", "src.main:app", "--host", "0.0.0.0", "--port", "8080"]
     ports:
       - "8080:8080"

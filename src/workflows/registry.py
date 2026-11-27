@@ -109,17 +109,10 @@ def classify_workflow(user_request: str) -> WorkflowDecision:
 
     lowered = clean_req.lower()
 
-    # 1. Multi-Target / Comparative / Multi-Stage Cross-Functional Tasks -> Autonomous Multi-Step
+    # 1. Multi-Target / Comparative / Decomposition Tasks -> Autonomous Multi-Step
     if (
-        any(w in lowered for w in [
-            "compare", "three open-source", "research three", "decompose", "multi-step",
-            "synthesize complete disaster", "audit system security", "across 5 endpoints",
-            "penetration tests", "design an automated etl", "roadmap proposals"
-        ])
-        and any(w in lowered for w in [
-            "database", "tools", "three", "frameworks", "libraries", "modules", "cloud",
-            "channels", "plan", "endpoints", "pipeline", "proposals", "vulnerabilities"
-        ])
+        any(w in lowered for w in ["compare", "three open-source", "research three", "decompose", "multi-step", "synthesize complete disaster"])
+        and any(w in lowered for w in ["database", "tools", "three", "frameworks", "libraries", "modules", "cloud", "channels", "plan"])
     ):
         return WorkflowDecision(
             workflow=WorkflowType.AUTONOMOUS.value,
@@ -140,40 +133,29 @@ def classify_workflow(user_request: str) -> WorkflowDecision:
             reason="Requires system diagnostics, log trace inspection, root-cause classification, and recovery.",
         )
 
-    # 3. Research & Scientific Inquiry (takes precedence over generic keyword matches)
-    if any(k in lowered for k in [
-        "research the latest", "literature review", "clinical trial", "evidence extraction",
-        "retrieve empirical sources", "find information", "paper review", "advancements in"
-    ]) or (lowered.startswith("research ") and "compare" not in lowered):
-        return WorkflowDecision(
-            workflow=WorkflowType.RESEARCH.value,
-            confidence=0.95,
-            reason="Requires multi-source research, query decomposition, and cross-source evidence verification.",
-        )
-
-    # 4. Code Generation & Execution
+    # 3. Code Generation & Execution
     if any(k in lowered for k in [
         "write a python", "write a script", "implement", "python script", "code to",
         "debug this", "run in sandbox", "fix bug", "lru cache", "connection pool",
         "rate limiter", "csv stream", "json schema", "worker queue", "run-length",
         "topological sort", "levenshtein", "password hasher", "file reader",
-        "priority queue", "decorator", "trie prefix", "circular buffer", "merkle",
+        "priority queue", "decorator", "trie", "circular buffer", "merkle",
         "finite state", "disjoint set", "moving average", "interval tree", "consistent hashing"
-    ]) or re.search(r"\btrie\b", lowered):
+    ]):
         return WorkflowDecision(
             workflow=WorkflowType.CODING.value,
             confidence=0.96,
             reason="Requires code generation, sandboxed execution, unit test validation, and automated debugging.",
         )
 
-    # 5. Tabular Data Analysis & Statistics
+    # 4. Tabular Data Analysis & Statistics
     if any(k in lowered for k in [
         "analyze this csv", "analyze this dataset", "dataset", "statistically different",
         "t-test", "p-value", "correlation", "anova", "conversion rates", "churn",
         "survey results", "blood pressure", "cart abandonment", "cpu utilization",
         "session duration", "time series", "loan default", "ticket resolution",
         "inventory turnover", "dark mode increases", "energy consumption", "click-through",
-        "packet loss", "recovery days", "defect counts", "latency metrics", "performance anomalies"
+        "packet loss", "recovery days", "defect counts"
     ]):
         return WorkflowDecision(
             workflow=WorkflowType.DATA_ANALYSIS.value,
@@ -181,7 +163,7 @@ def classify_workflow(user_request: str) -> WorkflowDecision:
             reason="Requires tabular dataset analysis, statistical hypothesis testing, trap detection, and charts.",
         )
 
-    # 6. Document & Report Generation
+    # 5. Document & Report Generation
     if any(k in lowered for k in [
         "technical report", "design doc", "design document", "architecture review",
         "postmortem", "audit report", "compliance audit", "api spec", "api specification",
